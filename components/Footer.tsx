@@ -6,7 +6,15 @@ import { ROUTES, TOUR, type Locale } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { trackEvent } from "@/tracking/events";
 
-export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+export function Footer({
+  locale,
+  dict,
+  className
+}: {
+  locale: Locale;
+  dict: Dictionary;
+  className?: string;
+}) {
   const year = new Date().getFullYear();
   const mainLinks = [
     [dict.nav.home, ROUTES[locale].home],
@@ -27,7 +35,14 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   ] as const;
 
   return (
-    <footer className="border-t border-volcanic/10 bg-gradient-to-b from-night/10 via-jungle/25 to-night/40">
+    <footer
+      className={[
+        "border-t border-volcanic/10 bg-gradient-to-b from-night/10 via-jungle/25 to-night/40",
+        className
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="section-shell grid gap-10 py-12 md:grid-cols-[1.1fr_0.8fr_1fr] md:py-14">
         <div>
           <div className="flex items-center gap-3 text-soft">

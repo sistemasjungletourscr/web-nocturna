@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BenefitsSection } from "@/components/BenefitsSection";
 import { ContactSection } from "@/components/ContactSection";
+import { FadeInSections } from "@/components/FadeInSections";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -38,22 +39,35 @@ export default async function HomePage({
 
   return (
     <>
-      <Header locale={locale} dict={dict} page="home" />
+      <Header
+        locale={locale}
+        dict={dict}
+        page="home"
+        className="load-fade-in load-fade-in-down"
+      />
       <main>
-        <Hero locale={locale} dict={dict} />
-        <BenefitsSection dict={dict} />
-        <TourCard dict={dict} />
-        <WildlifeSection dict={dict} />
-        <PeekBookingWidget
+        <Hero
           locale={locale}
-          title={dict.booking.title}
-          copy={dict.booking.copy}
-          button={dict.booking.button}
+          dict={dict}
+          contentClassName="load-fade-in load-fade-in-up load-fade-in-delay-1"
         />
-        <ReviewsSection locale={locale} dict={dict} />
-        <ContactSection locale={locale} dict={dict} />
+        <FadeInSections as="div">
+          <BenefitsSection dict={dict} />
+          <TourCard dict={dict} />
+          <WildlifeSection dict={dict} />
+          <PeekBookingWidget
+            locale={locale}
+            title={dict.booking.title}
+            copy={dict.booking.copy}
+            button={dict.booking.button}
+          />
+          <ReviewsSection locale={locale} dict={dict} />
+          <ContactSection locale={locale} dict={dict} />
+        </FadeInSections>
       </main>
-      <Footer locale={locale} dict={dict} />
+      <FadeInSections as="div">
+        <Footer locale={locale} dict={dict} />
+      </FadeInSections>
       <WhatsAppButton
         locale={locale}
         label={dict.nav.whatsapp}

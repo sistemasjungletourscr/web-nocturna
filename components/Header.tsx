@@ -11,10 +11,11 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 type HeaderProps = {
   locale: Locale;
   dict: Dictionary;
+  className?: string;
   page?: "home" | "faq" | "about" | "terms" | "cancellation" | "thanks";
 };
 
-export function Header({ locale, dict, page = "home" }: HeaderProps) {
+export function Header({ locale, dict, className, page = "home" }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const home = ROUTES[locale].home;
   const nav = [
@@ -26,7 +27,14 @@ export function Header({ locale, dict, page = "home" }: HeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-volcanic/10 bg-night/88 backdrop-blur-xl">
+    <header
+      className={[
+        "sticky top-0 z-40 border-b border-volcanic/10 bg-night/88 backdrop-blur-xl",
+        className
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="section-shell flex min-h-[76px] items-center justify-between gap-4">
         <Link href={home} className="flex items-center gap-3 text-soft">
           <span className="rounded-md bg-lantern/12 p-2 text-lantern">

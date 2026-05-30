@@ -7,9 +7,10 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 type HeroProps = {
   locale: Locale;
   dict: Dictionary;
+  contentClassName?: string;
 };
 
-export function Hero({ locale, dict }: HeroProps) {
+export function Hero({ locale, dict, contentClassName }: HeroProps) {
   return (
     <section className="relative isolate min-h-[calc(100svh-76px)] overflow-hidden">
       <Image
@@ -36,7 +37,14 @@ export function Hero({ locale, dict }: HeroProps) {
           />
         ))}
       </div>
-      <div className="section-shell relative z-10 flex min-h-[calc(100svh-76px)] items-center py-16">
+      <div
+        className={[
+          "section-shell relative z-10 flex min-h-[calc(100svh-76px)] items-center py-16",
+          contentClassName
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className="max-w-3xl">
           <p className="mb-4 inline-flex rounded-full border border-lantern/30 bg-lantern/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-lantern">
             {dict.hero.eyebrow}
