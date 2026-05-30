@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --header-height: 76px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #06130e;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(31, 92, 58, 0.34), transparent 28rem),
+    radial-gradient(circle at 85% 0%, rgba(245, 182, 66, 0.1), transparent 26rem),
+    #06130e;
+  color: #f7f4ea;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  outline-color: #f5b642;
+}
+
+::selection {
+  background: rgba(245, 182, 66, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.section-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.glass-panel {
+  border: 1px solid rgba(232, 216, 184, 0.14);
+  background: linear-gradient(145deg, rgba(6, 19, 14, 0.78), rgba(11, 42, 27, 0.7));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+}
+
+.anchor-offset {
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.hero-mask {
+  background:
+    linear-gradient(90deg, rgba(6, 19, 14, 0.96) 0%, rgba(6, 19, 14, 0.82) 39%, rgba(6, 19, 14, 0.2) 100%),
+    radial-gradient(circle at 80% 42%, rgba(245, 182, 66, 0.18), transparent 28rem);
+}
+
+.lantern-sweep {
+  background: conic-gradient(
+    from 210deg at 50% 50%,
+    transparent 0deg,
+    rgba(245, 182, 66, 0.1) 18deg,
+    rgba(245, 182, 66, 0.24) 30deg,
+    transparent 48deg,
+    transparent 360deg
+  );
+  animation: sweep 9s ease-in-out infinite alternate;
+  filter: blur(8px);
+}
+
+.firefly {
+  animation: firefly 7s ease-in-out infinite;
+}
+
+.mist {
+  animation: mist 18s linear infinite alternate;
+}
+
+@keyframes sweep {
+  from {
+    transform: translate3d(-12%, 12%, 0) rotate(-10deg) scale(1.05);
+    opacity: 0.52;
+  }
+  to {
+    transform: translate3d(10%, -6%, 0) rotate(10deg) scale(1.22);
+    opacity: 0.72;
+  }
+}
+
+@keyframes firefly {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    opacity: 0.85;
+    transform: translate3d(18px, -24px, 0);
+  }
+}
+
+@keyframes mist {
+  from {
+    transform: translateX(-3%);
+    opacity: 0.12;
+  }
+  to {
+    transform: translateX(5%);
+    opacity: 0.22;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
