@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { PeekBookingButton } from "@/components/PeekBookingButton";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ROUTES, type Locale } from "@/lib/constants";
+import { IMAGES, ROUTES, type Locale } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -15,10 +15,12 @@ type AboutPageLayoutProps = {
   dict: Dictionary;
 };
 
-const highlightIcons = [Mountain, ShieldCheck, Binoculars, Leaf];
+const highlightIcons = [Mountain, ShieldCheck, Leaf, Binoculars];
 
 export function AboutPageLayout({ locale, dict }: AboutPageLayoutProps) {
   const about = dict.pages.about;
+  const featuredSections = about.sections.slice(0, 2);
+  const remainingSections = about.sections.slice(2);
 
   return (
     <>
@@ -52,8 +54,36 @@ export function AboutPageLayout({ locale, dict }: AboutPageLayoutProps) {
 
         <section className="section-shell py-12 md:py-16">
           <FadeInSections as="div" className="mx-auto grid max-w-5xl gap-10">
+            <section className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.82fr)] lg:items-stretch">
+              <div className="grid gap-5">
+                {featuredSections.map((section) => (
+                  <article
+                    key={section.title}
+                    className="rounded-lg border border-volcanic/15 bg-white/5 p-6 sm:p-7"
+                  >
+                    <h2 className="font-heading text-3xl leading-tight text-soft md:text-4xl">
+                      {section.title}
+                    </h2>
+                    <p className="mt-4 text-base leading-8 text-fog">
+                      {section.body}
+                    </p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="relative min-h-[300px] overflow-hidden rounded-lg border border-volcanic/15 bg-white/5 sm:min-h-[380px] lg:min-h-full">
+                <Image
+                  src={IMAGES.treeFrog}
+                  alt="Tree frog at Arenal Forest Night Hike"
+                  fill
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </section>
+
             <section className="grid gap-5">
-              {about.sections.map((section) => (
+              {remainingSections.map((section) => (
                 <article
                   key={section.title}
                   className="rounded-lg border border-volcanic/15 bg-white/5 p-6 sm:p-7"

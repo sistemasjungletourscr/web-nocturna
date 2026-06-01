@@ -129,7 +129,10 @@ export const en = {
     date: "Preferred date",
     people: "Number of people",
     message: "Message",
-    submit: "Send by Email",
+    submit: "Send message",
+    submitting: "Sending...",
+    success: "Message sent. We will reply soon.",
+    error: "We could not send your message. Please try again or contact us on WhatsApp.",
     mapTitle: "Map to provisional meeting area"
   },
   footer: {
@@ -277,8 +280,8 @@ export const en = {
           copy: "Responsible wildlife observation, interpretation of the environment, and respect for wild animals."
         },
         {
-          title: "Authentic",
-          copy: "A real night hike through natural terrain, not a generic flat night walk."
+          title: "Guides",
+          copy: "Professional local naturalist guides, bilingual ESP/ENG."
         }
       ],
       ctaTitle: "Experience the night forest with us",

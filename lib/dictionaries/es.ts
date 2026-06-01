@@ -127,7 +127,10 @@ export const es = {
     date: "Fecha deseada",
     people: "Número de personas",
     message: "Mensaje",
-    submit: "Enviar por Email",
+    submit: "Enviar mensaje",
+    submitting: "Enviando...",
+    success: "Mensaje enviado. Te responderemos pronto.",
+    error: "No pudimos enviar el mensaje. Intenta de nuevo o escrÃ­benos por WhatsApp.",
     mapTitle: "Mapa al punto de encuentro provisional"
   },
   footer: {
@@ -238,7 +241,7 @@ export const es = {
     },
     about: {
       title: "Nosotros",
-      eyebrow: "Experiencia local en La Fortuna",
+      eyebrow: "Experiencia Nocturna en La Fortuna",
       intro:
         "Somos una experiencia nocturna guiada en La Fortuna, creada para viajeros que quieren conocer el bosque del Arenal de una forma más real, segura y cercana.",
       copy: "Arenal Forest Night Hike es una experiencia naturalista guiada para viajeros que buscan una aventura nocturna más auténtica en La Fortuna. El hike explora terreno elevado cerca de las faldas del Volcán Arenal con guía bilingüe y enfoque en seguridad.",
@@ -275,8 +278,8 @@ export const es = {
           copy: "Observación responsable de fauna, interpretación del entorno y respeto por la vida silvestre."
         },
         {
-          title: "Auténtico",
-          copy: "Un hike nocturno real por terreno natural, no una caminata plana genérica."
+          title: "Guías",
+          copy: "Guías naturalistas profesionales y bilingües ESP/ENG."
         }
       ],
       ctaTitle: "Vive el bosque nocturno con nosotros",

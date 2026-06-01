@@ -1,17 +1,13 @@
 "use client";
 
 import type { FormEvent } from "react";
+import { useState } from "react";
 import type { Locale } from "@/lib/constants";
 import { TOUR } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { trackEvent } from "@/tracking/events";
 
-function clean(value: FormDataEntryValue | null) {
-  return String(value ?? "")
-    .replace(/[<>]/g, "")
-    .trim()
-    .slice(0, 500);
-}
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm({
   locale,
@@ -20,34 +16,70 @@ export function ContactForm({
   locale: Locale;
   dict: Dictionary;
 }) {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const subject =
-      locale === "es"
-        ? "Consulta sobre Arenal Forest Night Hike"
-        : "Question about Arenal Forest Night Hike";
-    const body = [
-      `${dict.contact.name}: ${clean(formData.get("name"))}`,
-      `${dict.contact.email}: ${clean(formData.get("email"))}`,
-      `${dict.contact.phone}: ${clean(formData.get("phone"))}`,
-      `${dict.contact.date}: ${clean(formData.get("date"))}`,
-      `${dict.contact.people}: ${clean(formData.get("people"))}`,
-      `${dict.contact.message}: ${clean(formData.get("message"))}`
-    ].join("\n");
+    if (status === "submitting") return;
 
-    trackEvent("submit_contact_form", {
-      tour_name: TOUR.name,
-      language: locale
-    });
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    window.location.href = `mailto:${TOUR.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          locale,
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          date: formData.get("date"),
+          people: formData.get("people"),
+          message: formData.get("message"),
+          company: formData.get("company")
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact request failed");
+      }
+
+      trackEvent("submit_contact_form", {
+        tour_name: TOUR.name,
+        language: locale
+      });
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   }
 
+  const isSubmitting = status === "submitting";
+
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4">
+    <form
+      onSubmit={handleSubmit}
+      onChange={() => {
+        if (status === "success" || status === "error") setStatus("idle");
+      }}
+      className="grid gap-4"
+    >
+      <label className="sr-only" aria-hidden="true">
+        Company
+        <input
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </label>
       {[
         ["name", dict.contact.name, "text"],
         ["email", dict.contact.email, "email"],
@@ -62,6 +94,7 @@ export function ContactForm({
             type={type}
             min={name === "people" ? "1" : undefined}
             required={name === "name" || name === "email"}
+            disabled={isSubmitting}
             className="rounded-md border border-volcanic/20 bg-night/70 px-4 py-3 text-soft placeholder:text-fog/60"
           />
         </label>
@@ -71,14 +104,28 @@ export function ContactForm({
         <textarea
           name="message"
           rows={5}
+          disabled={isSubmitting}
           className="resize-y rounded-md border border-volcanic/20 bg-night/70 px-4 py-3 text-soft placeholder:text-fog/60"
         />
       </label>
+      <div aria-live="polite">
+        {status === "success" && (
+          <p className="rounded-md border border-lantern/30 bg-lantern/10 px-4 py-3 text-sm font-semibold text-lantern">
+            {dict.contact.success}
+          </p>
+        )}
+        {status === "error" && (
+          <p className="rounded-md border border-red-300/30 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-100">
+            {dict.contact.error}
+          </p>
+        )}
+      </div>
       <button
         type="submit"
-        className="rounded-md bg-lantern px-5 py-3 text-sm font-bold text-night transition hover:bg-[#ffd06a]"
+        disabled={isSubmitting}
+        className="rounded-md bg-lantern px-5 py-3 text-sm font-bold text-night transition hover:bg-[#ffd06a] disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {dict.contact.submit}
+        {isSubmitting ? dict.contact.submitting : dict.contact.submit}
       </button>
     </form>
   );
