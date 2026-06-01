@@ -10,7 +10,6 @@ import { PeekBookingWidget } from "@/components/PeekBookingWidget";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { TourCard } from "@/components/TourCard";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WildlifeSection } from "@/components/WildlifeSection";
 import { isLocale, ROUTES, type Locale } from "@/lib/constants";
 import { getDictionary } from "@/lib/dictionaries";
@@ -68,13 +67,6 @@ export default async function HomePage({
       <FadeInSections as="div">
         <Footer locale={locale} dict={dict} />
       </FadeInSections>
-      <WhatsAppButton
-        locale={locale}
-        label={dict.nav.whatsapp}
-        source="floating_button"
-        variant="floating"
-        iconOnly
-      />
       <SeoJsonLd data={baseBusinessSchema(locale)} />
       <SeoJsonLd
         data={breadcrumbSchema(locale, [

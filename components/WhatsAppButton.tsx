@@ -7,7 +7,7 @@ import { trackEvent, whatsappParams } from "@/tracking/events";
 type WhatsAppButtonProps = {
   locale: Locale;
   label: string;
-  source: "header" | "hero" | "faq" | "contact" | "floating_button";
+  source: "header" | "hero" | "faq" | "about" | "contact" | "floating_button";
   variant?: "primary" | "ghost" | "floating";
   iconOnly?: boolean;
   hideIcon?: boolean;

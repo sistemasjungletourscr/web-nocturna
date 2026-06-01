@@ -25,7 +25,7 @@ export const en = {
       "Questions about the Arenal Forest Night Hike in La Fortuna, Costa Rica, including difficulty, wildlife, weather, what to bring, reservations, and booking details.",
     aboutTitle: "About | Arenal Forest Night Hike",
     aboutDescription:
-      "Learn about Arenal Forest Night Hike, a real guided night hike in the forested foothills of Arenal Volcano.",
+      "Learn about Arenal Forest Night Hike, a guided night experience in La Fortuna focused on small groups, safety, and responsible wildlife observation.",
     termsTitle: "Terms and Conditions | Arenal Forest Night Hike",
     termsDescription:
       "Terms for Arenal Forest Night Hike reservations, tour conditions, safety, pricing, transportation, parking, and visitor responsibilities.",
@@ -240,8 +240,52 @@ export const en = {
     },
     about: {
       title: "About Arenal Forest Night Hike",
+      eyebrow: "A local night experience in La Fortuna",
+      intro:
+        "We are a guided night experience in La Fortuna created for travelers who want to discover the Arenal forest in a more real, safe, and personal way.",
       copy: "Arenal Forest Night Hike is a guided naturalist experience designed for travelers who want a more authentic night adventure in La Fortuna. The hike explores elevated forest terrain near the foothills of Arenal Volcano with bilingual guidance and a safety-first approach.",
-      image: IMAGES.forest
+      image: IMAGES.redEyedPair,
+      sections: [
+        {
+          title: "Who we are",
+          body: "Arenal Forest Night Hike was created to share a more authentic side of the night forest in La Fortuna: a guided, safe, and natural experience that goes beyond a flat or generic night walk. Our goal is to help visitors feel the forest after dark, understand its wildlife, and move through it with respect."
+        },
+        {
+          title: "How we guide",
+          body: "We guide at a safe pace, with small groups and close attention to the details of the environment. Your guide helps you observe better, interpret sounds, movement, and forest signs, and keeps the experience responsible without handling animals or forcing wildlife encounters."
+        },
+        {
+          title: "Safety and nature",
+          body: "Safety is central to the tour. Before and during the hike, the guide adapts the pace of the group, checks trail conditions, and keeps the experience within a controlled environment. Because this is a nighttime activity in nature, every outing can feel different depending on weather, season, and wildlife behavior."
+        },
+        {
+          title: "What we want to share",
+          body: "We do not promise an exact checklist of animals. Nature changes every night. Our work is to guide you carefully, help you observe more, and show you details that often go unnoticed in the forest after sunset."
+        }
+      ],
+      highlights: [
+        {
+          title: "Local",
+          copy: "An experience focused on the night forest of La Fortuna and the foothills of Arenal Volcano."
+        },
+        {
+          title: "Safe",
+          copy: "Guided pace, small groups, and adjustments based on weather, trail, and operational conditions."
+        },
+        {
+          title: "Naturalist",
+          copy: "Responsible wildlife observation, interpretation of the environment, and respect for wild animals."
+        },
+        {
+          title: "Authentic",
+          copy: "A real night hike through natural terrain, not a generic flat night walk."
+        }
+      ],
+      ctaTitle: "Experience the night forest with us",
+      ctaCopy:
+        "Reserve your space for the 6:00 PM tour or message us on WhatsApp if you want to confirm details before booking.",
+      ctaPrimary: "Book Now",
+      ctaSecondary: "Ask by WhatsApp"
     },
     terms: {
       title: "Terms and Conditions",

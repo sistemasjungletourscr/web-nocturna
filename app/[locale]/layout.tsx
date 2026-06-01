@@ -5,7 +5,9 @@ import "@/app/globals.css";
 import { GoogleSearchConsoleVerification } from "@/components/GoogleSearchConsoleVerification";
 import { TrackingManager } from "@/components/TrackingManager";
 import { CookieBanner } from "@/components/CookieBanner";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { isLocale, LOCALES, type Locale } from "@/lib/constants";
+import { getDictionary } from "@/lib/dictionaries";
 
 const heading = localFont({
   src: "../../node_modules/@fontsource/marcellus/files/marcellus-latin-400-normal.woff2",
@@ -66,6 +68,7 @@ export default async function LocaleLayout({
   const { locale: localeParam } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;
+  const dict = getDictionary(locale);
 
   return (
     <html lang={locale} className={`${heading.variable} ${body.variable}`}>
@@ -74,6 +77,13 @@ export default async function LocaleLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
+        <WhatsAppButton
+          locale={locale}
+          label={dict.nav.whatsapp}
+          source="floating_button"
+          variant="floating"
+          iconOnly
+        />
         <CookieBanner locale={locale} />
         <TrackingManager />
       </body>

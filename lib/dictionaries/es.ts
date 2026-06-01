@@ -24,7 +24,7 @@ export const es = {
       "Preguntas frecuentes sobre Arenal Forest Night Hike en La Fortuna, Costa Rica: dificultad, fauna, clima, qu\u00e9 llevar, reservas y detalles del tour.",
     aboutTitle: "Nosotros | Arenal Forest Night Hike",
     aboutDescription:
-      "Conoce Arenal Forest Night Hike, una caminata nocturna guiada en el bosque de las faldas del Volcán Arenal.",
+      "Conoce Arenal Forest Night Hike, una experiencia nocturna guiada en La Fortuna con grupos pequeños, seguridad y observación responsable de fauna.",
     termsTitle: "Términos y Condiciones | Arenal Forest Night Hike",
     termsDescription:
       "Términos de reserva para Arenal Forest Night Hike: condiciones del tour, seguridad, precios, transporte, parqueo y responsabilidades del visitante.",
@@ -238,8 +238,52 @@ export const es = {
     },
     about: {
       title: "Nosotros",
+      eyebrow: "Experiencia local en La Fortuna",
+      intro:
+        "Somos una experiencia nocturna guiada en La Fortuna, creada para viajeros que quieren conocer el bosque del Arenal de una forma más real, segura y cercana.",
       copy: "Arenal Forest Night Hike es una experiencia naturalista guiada para viajeros que buscan una aventura nocturna más auténtica en La Fortuna. El hike explora terreno elevado cerca de las faldas del Volcán Arenal con guía bilingüe y enfoque en seguridad.",
-      image: IMAGES.forest
+      image: IMAGES.redEyedPair,
+      sections: [
+        {
+          title: "Quiénes somos",
+          body: "Arenal Forest Night Hike nace para mostrar una cara más auténtica del bosque nocturno de La Fortuna: una experiencia guiada, segura y natural, lejos de una caminata plana o genérica. Nuestro enfoque es llevar al visitante a sentir el bosque de noche, entender su vida silvestre y recorrerlo con respeto."
+        },
+        {
+          title: "Nuestra forma de guiar",
+          body: "Guiamos con ritmo seguro, grupos pequeños y atención a los detalles del entorno. El guía ayuda a observar mejor, interpreta sonidos, movimientos y huellas del bosque, y mantiene una experiencia responsable sin manipular animales ni forzar encuentros con la fauna."
+        },
+        {
+          title: "Seguridad y naturaleza",
+          body: "La seguridad es parte central del tour. Antes y durante la caminata, el guía adapta el ritmo del grupo, revisa condiciones del sendero y mantiene la experiencia dentro de un entorno controlado. Al ser una actividad nocturna en naturaleza, cada salida puede sentirse distinta según clima, temporada y comportamiento de la fauna."
+        },
+        {
+          title: "Lo que buscamos compartir",
+          body: "No buscamos prometer una lista exacta de animales. La naturaleza cambia cada noche. Nuestro trabajo es guiarte con cuidado, ayudarte a observar mejor y mostrarte detalles que muchas veces pasan desapercibidos en el bosque después del atardecer."
+        }
+      ],
+      highlights: [
+        {
+          title: "Local",
+          copy: "Una experiencia enfocada en el bosque nocturno de La Fortuna y las faldas del Volcán Arenal."
+        },
+        {
+          title: "Seguro",
+          copy: "Ritmo guiado, grupos pequeños y ajustes según clima, sendero y condiciones operativas."
+        },
+        {
+          title: "Naturalista",
+          copy: "Observación responsable de fauna, interpretación del entorno y respeto por la vida silvestre."
+        },
+        {
+          title: "Auténtico",
+          copy: "Un hike nocturno real por terreno natural, no una caminata plana genérica."
+        }
+      ],
+      ctaTitle: "Vive el bosque nocturno con nosotros",
+      ctaCopy:
+        "Reserva tu espacio para el tour de las 6:00 PM o escríbenos por WhatsApp si quieres confirmar detalles antes de reservar.",
+      ctaPrimary: "Reservar ahora",
+      ctaSecondary: "Consultar por WhatsApp"
     },
     terms: {
       title: "Términos y Condiciones",

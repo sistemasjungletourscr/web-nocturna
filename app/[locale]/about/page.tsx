@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SupportPage } from "@/components/SupportPage";
+import { AboutPageLayout } from "@/components/AboutPageLayout";
 import { isLocale, type Locale } from "@/lib/constants";
 import { getDictionary } from "@/lib/dictionaries";
 import { buildMetadata } from "@/lib/seo";
@@ -29,15 +29,5 @@ export default async function AboutPage({
   const locale = localeParam as Locale;
   const dict = getDictionary(locale);
 
-  return (
-    <SupportPage
-      locale={locale}
-      dict={dict}
-      page="about"
-      title={dict.pages.about.title}
-      image={dict.pages.about.image}
-    >
-      <p>{dict.pages.about.copy}</p>
-    </SupportPage>
-  );
+  return <AboutPageLayout locale={locale} dict={dict} />;
 }
