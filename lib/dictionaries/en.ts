@@ -22,7 +22,7 @@ export const en = {
       "Join a real night hike in the forested foothills of Arenal Volcano. Daily 6:00 PM guided tour, approx. 2 hours, ages 4+, bilingual guide and small groups.",
     faqTitle: "FAQ | Arenal Forest Night Hike",
     faqDescription:
-      "Frequently asked questions about the Arenal Forest Night Hike in La Fortuna, Costa Rica.",
+      "Questions about the Arenal Forest Night Hike in La Fortuna, Costa Rica, including difficulty, wildlife, weather, what to bring, reservations, and booking details.",
     aboutTitle: "About | Arenal Forest Night Hike",
     aboutDescription:
       "Learn about Arenal Forest Night Hike, a real guided night hike in the forested foothills of Arenal Volcano.",
@@ -142,29 +142,102 @@ export const en = {
       ["Cancellation Policy", ROUTES.en.cancellation]
     ]
   },
+  faqCategories: {
+    tour: "Tour and difficulty",
+    wildlife: "Wildlife and experience",
+    family: "Families and safety",
+    gear: "What to bring and weather",
+    booking: "Reservations and logistics"
+  },
   faq: [
     {
+      category: "tour",
       q: "Is this tour a flat night walk?",
-      a: "No. This is a real night hike on natural elevated terrain in the forested foothills of Arenal Volcano."
+      a: "No. Arenal Forest Night Hike is a real night hike on natural elevated terrain in the forested foothills of Arenal Volcano, not a flat paved walk."
     },
     {
-      q: "What time does the tour start?",
-      a: "The tour runs every day of the year at 6:00 PM, subject to weather and operational conditions."
+      category: "tour",
+      q: "How difficult is the Arenal Forest Night Hike?",
+      a: "The difficulty is moderate. The trail includes natural terrain, uphill sections, humidity, roots, and uneven ground, so guests should be comfortable walking outdoors at night."
     },
     {
-      q: "Are animals guaranteed?",
-      a: "No. Wildlife sightings depend on season, weather, natural behavior, and trail conditions."
+      category: "tour",
+      q: "What time does the night hike start?",
+      a: "The tour starts daily at 6:00 PM, subject to weather, trail, and operational conditions."
     },
     {
-      q: "Is it suitable for children?",
-      a: "Children ages 4 and older may join. Families should be comfortable with a moderate night hike."
+      category: "tour",
+      q: "How long is the tour and how far do we walk?",
+      a: "The experience lasts approximately 2 hours and covers around 2 km, depending on group pace, wildlife activity, weather, and trail conditions."
     },
     {
+      category: "wildlife",
+      q: "What animals can we see during the night hike?",
+      a: "Possible sightings include colorful frogs, snakes, insects, reptiles, mammals, and other nocturnal wildlife. Every night is different because the animals move naturally in their habitat."
+    },
+    {
+      category: "wildlife",
+      q: "Are wildlife sightings guaranteed?",
+      a: "No. Wildlife sightings depend on season, weather, temperature, natural behavior, and trail conditions. The guide focuses on finding and interpreting what is active that night."
+    },
+    {
+      category: "wildlife",
+      q: "What makes this different from a regular La Fortuna night walk?",
+      a: "Many night walks stay on easier flat trails. This hike explores elevated forest terrain near the Arenal Volcano foothills, creating a more immersive and adventurous night experience."
+    },
+    {
+      category: "family",
+      q: "Is the tour suitable for children?",
+      a: "Children ages 4 and older may join. Families should be comfortable with a moderate night hike, darkness, natural terrain, and a slower group pace when needed."
+    },
+    {
+      category: "family",
+      q: "Is it safe to hike in the forest at night?",
+      a: "Yes, the hike is guided by a professional bilingual guide and uses flashlight equipment. Guests must follow guide instructions and stay on the trail for safety."
+    },
+    {
+      category: "gear",
       q: "What shoes should I wear?",
-      a: "Hiking shoes or closed-toe shoes are important because the trail includes natural terrain and uphill sections."
+      a: "Hiking shoes or closed-toe shoes are important. The trail includes natural ground, uphill sections, possible mud, and uneven surfaces."
+    },
+    {
+      category: "gear",
+      q: "What should I bring for the night hike?",
+      a: "Bring long pants, closed-toe shoes, mosquito repellent, personal medication, a rain jacket, and a camera if you want photos."
+    },
+    {
+      category: "gear",
+      q: "Does the tour operate if it rains?",
+      a: "Light rain is common in the rainforest and the tour may still operate. The activity can be modified or canceled if weather, safety, or trail conditions require it."
+    },
+    {
+      category: "booking",
+      q: "What is included in the price?",
+      a: "The tour includes entrance, flashlight equipment, and a professional bilingual guide in Spanish and English. VAT, fees, food, and photos are not included unless stated in your booking."
+    },
+    {
+      category: "booking",
+      q: "Is pickup or drop-off included from La Fortuna?",
+      a: "Pick-up or drop-off service may be available in the La Fortuna area. Confirm your location and logistics when booking or contact us by WhatsApp before reserving."
+    },
+    {
+      category: "booking",
+      q: "What is the cancellation policy?",
+      a: "Free cancellation is available up to 24 hours before the tour. Late cancellations and no-shows may be non-refundable, and the operator may modify or cancel the activity for safety or weather."
     }
   ],
   pages: {
+    faq: {
+      title: "Frequently Asked Questions",
+      eyebrow: "FAQ",
+      copy: "Practical answers about the Arenal Forest Night Hike in La Fortuna, including difficulty, wildlife, weather, what to bring, safety, and booking details.",
+      heroImageAlt: "Arenal rainforest at night near La Fortuna, Costa Rica",
+      ctaTitle: "Ready to book your night hike?",
+      ctaCopy: "Reserve your space for the 6:00 PM Arenal Forest Night Hike or ask us any final question by WhatsApp before booking.",
+      ctaPrimary: "Book Now",
+      ctaSecondary: "Ask by WhatsApp",
+      tourLink: "View tour details"
+    },
     about: {
       title: "About Arenal Forest Night Hike",
       copy: "Arenal Forest Night Hike is a guided naturalist experience designed for travelers who want a more authentic night adventure in La Fortuna. The hike explores elevated forest terrain near the foothills of Arenal Volcano with bilingual guidance and a safety-first approach.",

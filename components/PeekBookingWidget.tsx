@@ -2,20 +2,9 @@
 
 import { useEffect } from "react";
 import { CalendarDays, TicketPercent } from "lucide-react";
+import { PeekBookingButton } from "@/components/PeekBookingButton";
 import { TOUR, type Locale } from "@/lib/constants";
-import { peekBookingParams, trackEvent } from "@/tracking/events";
-
-declare global {
-  interface Window {
-    _peekConfig?: {
-      key: string;
-    };
-  }
-}
-
-const PEEK_KEY = "9a4fe6cc-212c-4b90-b12d-98bce7693768";
-const PEEK_SCRIPT_ID = "peek-book-button-js";
-const PEEK_CSS_ID = "peek-book-button-css";
+import { trackEvent } from "@/tracking/events";
 
 type PeekBookingWidgetProps = {
   locale: Locale;
@@ -36,31 +25,6 @@ export function PeekBookingWidget({
       language: locale
     });
   }, [locale]);
-
-  useEffect(() => {
-    window._peekConfig = { key: PEEK_KEY };
-
-    const stamp = `${new Date().getMonth()}-${new Date().getDate()}`;
-    const basePath = "https://js.peek.com";
-    const head = document.getElementsByTagName("head")[0];
-
-    if (!document.getElementById(PEEK_CSS_ID)) {
-      const css = document.createElement("link");
-      css.id = PEEK_CSS_ID;
-      css.href = `${basePath}/widget_button.css?ts=${stamp}`;
-      css.rel = "stylesheet";
-      css.type = "text/css";
-      head.appendChild(css);
-    }
-
-    if (!document.getElementById(PEEK_SCRIPT_ID)) {
-      const script = document.createElement("script");
-      script.id = PEEK_SCRIPT_ID;
-      script.src = `${basePath}/widget_button.js?ts=${stamp}`;
-      script.async = true;
-      head.appendChild(script);
-    }
-  }, []);
 
   const offerLabel = locale === "es" ? "Oferta" : "Offer";
   const fromLabel = locale === "es" ? "Desde:" : "From:";
@@ -103,16 +67,11 @@ export function PeekBookingWidget({
             </p>
           </div>
 
-          <a
-            href={TOUR.peekUrl}
+          <PeekBookingButton
+            locale={locale}
+            label={button}
             className="mt-7 inline-flex w-full max-w-xl items-center justify-center rounded-md bg-lantern px-5 py-4 text-center text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
-            data-button-text={button}
-            onClick={() =>
-              trackEvent("click_peekpro_booking", peekBookingParams(locale))
-            }
-          >
-            {button}
-          </a>
+          />
         </div>
       </div>
     </section>
