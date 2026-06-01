@@ -28,7 +28,7 @@ export const en = {
       "Learn about Arenal Forest Night Hike, a real guided night hike in the forested foothills of Arenal Volcano.",
     termsTitle: "Terms and Conditions | Arenal Forest Night Hike",
     termsDescription:
-      "Temporary terms and conditions for Arenal Forest Night Hike reservations.",
+      "Terms for Arenal Forest Night Hike reservations, tour conditions, safety, pricing, transportation, parking, and visitor responsibilities.",
     cancellationTitle: "Cancellation Policy | Arenal Forest Night Hike",
     cancellationDescription:
       "Cancellation policy for Arenal Forest Night Hike bookings in La Fortuna.",
@@ -245,7 +245,61 @@ export const en = {
     },
     terms: {
       title: "Terms and Conditions",
-      copy: "These temporary terms describe general reservation conditions for Arenal Forest Night Hike. Booking details, operational conditions, taxes, and service terms may be updated before publication."
+      intro:
+        "These terms explain the general conditions for booking and joining Arenal Forest Night Hike. Please review them before reserving, especially the tour requirements and transportation conditions.",
+      generalTitle: "General tour conditions",
+      generalSections: [
+        {
+          title: "Reservations and confirmation",
+          items: [
+            "A reservation is confirmed when the booking is completed through the official booking flow or directly confirmed by the operator.",
+            "Guests are responsible for providing accurate contact information, participant details, and pickup or meeting point information when applicable."
+          ]
+        },
+        {
+          title: "Tour experience and trail conditions",
+          items: [
+            "Arenal Forest Night Hike is an outdoor guided night hike on natural forest terrain near the foothills of Arenal Volcano.",
+            "The route may include uneven, wet, muddy, or elevated sections. Wildlife sightings are part of a natural environment and cannot be guaranteed."
+          ]
+        },
+        {
+          title: "Participant requirements",
+          items: [
+            "Participants should be able to walk on natural trails for approximately two hours and follow the guide's safety instructions.",
+            "Closed-toe shoes are required. Guests should bring suitable clothing for rain, humidity, and night conditions."
+          ]
+        },
+        {
+          title: "Safety, weather, and operational changes",
+          items: [
+            "The operator may adjust the route, timing, meeting point, transportation logistics, or activity format due to weather, safety, trail, or operational conditions.",
+            "Participants must stay with the guide and follow instructions during the activity."
+          ]
+        },
+        {
+          title: "Pricing, taxes, and personal belongings",
+          items: [
+            "Prices are listed in USD unless otherwise stated. Taxes, booking fees, or service charges may apply through the booking provider.",
+            "Guests are responsible for their personal belongings during the tour and transportation."
+          ]
+        }
+      ],
+      cancellationLink:
+        "Cancellation, refund, no-show, and rescheduling conditions are explained on our Cancellation Policy page.",
+      transportSection: {
+        title: "Transportation conditions",
+        intro:
+          "Free transportation may be offered within the La Fortuna area shown in the pickup range image and must be confirmed when booking.",
+        imageAlt:
+          "Free pickup range map for Arenal Forest Night Hike in the La Fortuna area",
+        items: [
+          "Pickup and drop-off service is available only inside the free transportation range shown in the image, subject to confirmation and operational availability.",
+          "Guests outside the free pickup range may arrive at our meeting point, where free and secure parking is available.",
+          "If your lodging is outside the free range and you need transportation, contact us before booking so we can calculate the additional transportation cost.",
+          "Guests must be ready at the confirmed pickup time. Delays may affect the itinerary and the operator may not be able to wait for late arrivals."
+        ]
+      }
     },
     cancellation: {
       title: "Cancellation Policy",

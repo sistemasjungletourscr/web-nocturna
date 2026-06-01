@@ -50,7 +50,8 @@ export const IMAGES = {
   treeFrog: "/images/tree-frog-arenal-forest-night-hike.webp",
   snake: "/images/boa-snake-night-hike-la-fortuna-costa-rica.webp",
   nocturnalFrog:
-    "/images/nocturnal-frog-night-walk-la-fortuna-costa-rica.webp"
+    "/images/nocturnal-frog-night-walk-la-fortuna-costa-rica.webp",
+  transportRange: "/images/la-fortuna-free-transport-range.webp"
 };
 
 export const ROUTES = {

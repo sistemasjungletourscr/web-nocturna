@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SupportPage } from "@/components/SupportPage";
+import { TermsPageLayout } from "@/components/TermsPageLayout";
 import { isLocale, type Locale } from "@/lib/constants";
 import { getDictionary } from "@/lib/dictionaries";
 import { buildMetadata } from "@/lib/seo";
@@ -29,14 +29,5 @@ export default async function TermsPage({
   const locale = localeParam as Locale;
   const dict = getDictionary(locale);
 
-  return (
-    <SupportPage locale={locale} dict={dict} page="terms" title={dict.pages.terms.title}>
-      {/* Temporary legal copy. Review with qualified legal counsel before publishing. */}
-      <p>{dict.pages.terms.copy}</p>
-      <p className="mt-5">
-        Reservations may be affected by weather, safety, trail conditions, or
-        operational adjustments. Taxes and booking fees may apply.
-      </p>
-    </SupportPage>
-  );
+  return <TermsPageLayout locale={locale} dict={dict} />;
 }

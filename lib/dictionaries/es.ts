@@ -27,7 +27,7 @@ export const es = {
       "Conoce Arenal Forest Night Hike, una caminata nocturna guiada en el bosque de las faldas del Volcán Arenal.",
     termsTitle: "Términos y Condiciones | Arenal Forest Night Hike",
     termsDescription:
-      "Términos y condiciones temporales para reservas de Arenal Forest Night Hike.",
+      "Términos de reserva para Arenal Forest Night Hike: condiciones del tour, seguridad, precios, transporte, parqueo y responsabilidades del visitante.",
     cancellationTitle: "Políticas de Cancelación | Arenal Forest Night Hike",
     cancellationDescription:
       "Política de cancelación para reservas de Arenal Forest Night Hike en La Fortuna.",
@@ -243,7 +243,61 @@ export const es = {
     },
     terms: {
       title: "Términos y Condiciones",
-      copy: "Estos términos temporales describen condiciones generales de reserva para Arenal Forest Night Hike. Los detalles de reserva, condiciones operativas, impuestos y términos del servicio pueden actualizarse antes de publicar."
+      intro:
+        "Estos términos explican las condiciones generales para reservar y participar en Arenal Forest Night Hike. Te recomendamos revisarlos antes de reservar, especialmente los requisitos del tour y las condiciones de transporte.",
+      generalTitle: "Condiciones generales del tour",
+      generalSections: [
+        {
+          title: "Reservas y confirmación",
+          items: [
+            "La reserva queda confirmada cuando se completa por el flujo oficial de reserva o cuando el operador la confirma directamente.",
+            "El visitante es responsable de brindar datos de contacto correctos, detalles de los participantes y la información de pickup o punto de encuentro cuando aplique."
+          ]
+        },
+        {
+          title: "Experiencia del tour y condiciones del sendero",
+          items: [
+            "Arenal Forest Night Hike es una caminata nocturna guiada al aire libre en terreno natural de bosque cerca de las faldas del Volcán Arenal.",
+            "La ruta puede incluir partes irregulares, húmedas, con barro o terreno elevado. Los avistamientos de fauna ocurren en un entorno natural y no pueden garantizarse."
+          ]
+        },
+        {
+          title: "Requisitos del participante",
+          items: [
+            "Los participantes deben poder caminar en senderos naturales durante aproximadamente dos horas y seguir las instrucciones de seguridad del guía.",
+            "Se requiere calzado cerrado. Recomendamos llevar ropa adecuada para lluvia, humedad y condiciones nocturnas."
+          ]
+        },
+        {
+          title: "Seguridad, clima y cambios operativos",
+          items: [
+            "El operador puede ajustar la ruta, horario, punto de encuentro, logística de transporte o formato de la actividad por clima, seguridad, condiciones del sendero u operación.",
+            "Los participantes deben permanecer con el guía y seguir sus instrucciones durante la actividad."
+          ]
+        },
+        {
+          title: "Precio, impuestos y objetos personales",
+          items: [
+            "Los precios se muestran en USD salvo que se indique lo contrario. Pueden aplicar impuestos, cargos de reserva o cargos de servicio por medio del proveedor de reservas.",
+            "Cada visitante es responsable de sus objetos personales durante el tour y durante el transporte."
+          ]
+        }
+      ],
+      cancellationLink:
+        "Las condiciones de cancelación, reembolso, no-show y reprogramación se explican en nuestra página de Políticas de Cancelación.",
+      transportSection: {
+        title: "Condiciones de transporte",
+        intro:
+          "El transporte gratuito puede ofrecerse dentro del área de La Fortuna mostrada en la imagen del rango de pickup y debe confirmarse al momento de reservar.",
+        imageAlt:
+          "Mapa del rango de pickup gratuito para Arenal Forest Night Hike en el área de La Fortuna",
+        items: [
+          "El servicio de pickup y drop-off está disponible únicamente dentro del rango de transporte gratuito mostrado en la imagen, sujeto a confirmación y disponibilidad operativa.",
+          "Si tu hospedaje está fuera del rango gratuito, puedes llegar a nuestro punto de encuentro, donde ofrecemos parqueo gratuito y seguro.",
+          "Si estás fuera del rango gratuito y necesitas transporte, comunícate con nosotros antes de reservar para calcular el costo adicional del transporte.",
+          "Los visitantes deben estar listos a la hora de pickup confirmada. Los retrasos pueden afectar el itinerario y el operador podría no poder esperar llegadas tardías."
+        ]
+      }
     },
     cancellation: {
       title: "Políticas de Cancelación",

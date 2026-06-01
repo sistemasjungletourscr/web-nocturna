@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, ChevronDown, Clock, Gauge, Users } from "lucide-react";
+import { FadeInSections } from "@/components/FadeInSections";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PeekBookingButton } from "@/components/PeekBookingButton";
@@ -61,7 +62,7 @@ export default async function FaqPage({
           <div className="absolute inset-0 bg-gradient-to-r from-night via-night/82 to-night/28" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-night" />
           <div className="section-shell relative z-10 flex min-h-[420px] items-end py-14 md:min-h-[520px] md:py-20">
-            <div className="max-w-3xl">
+            <div className="load-fade-in load-fade-in-up max-w-3xl">
               <p className="mb-4 inline-flex rounded-full border border-lantern/30 bg-lantern/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-lantern">
                 {page.eyebrow}
               </p>
@@ -76,7 +77,7 @@ export default async function FaqPage({
         </section>
 
         <section className="section-shell py-12 md:py-16">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <FadeInSections as="div" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {facts.map(([label, value], index) => {
               const Icon = factIcons[index];
               return (
@@ -90,10 +91,11 @@ export default async function FaqPage({
                 </div>
               );
             })}
-          </div>
+          </FadeInSections>
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
             <aside className="lg:sticky lg:top-[calc(var(--header-height)+24px)]">
+              <FadeInSections as="div">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-lantern">
                 {locale === "es" ? "Categorías" : "Categories"}
               </p>
@@ -108,9 +110,10 @@ export default async function FaqPage({
                   </a>
                 ))}
               </nav>
+              </FadeInSections>
             </aside>
 
-            <div className="grid gap-8">
+            <FadeInSections as="div" className="grid gap-8">
               {categoryKeys.map((categoryKey) => {
                 const items = dict.faq.filter((item) => item.category === categoryKey);
 
@@ -123,7 +126,7 @@ export default async function FaqPage({
                     <h2 className="font-heading text-3xl text-soft md:text-4xl">
                       {dict.faqCategories[categoryKey]}
                     </h2>
-                    <div className="mt-5 grid gap-3">
+                    <FadeInSections as="div" className="mt-5 grid gap-3">
                       {items.map((item, index) => (
                         <details
                           key={item.q}
@@ -141,48 +144,50 @@ export default async function FaqPage({
                           <p className="mt-4 text-base leading-8 text-fog">{item.a}</p>
                         </details>
                       ))}
-                    </div>
+                    </FadeInSections>
                   </section>
                 );
               })}
-            </div>
+            </FadeInSections>
           </div>
         </section>
 
-        <section className="border-y border-volcanic/15 bg-gradient-to-br from-jungle via-night to-[#020b08]">
-          <div className="section-shell grid gap-8 py-14 md:grid-cols-[1fr_auto] md:items-center md:py-16">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-lantern">
-                {scheduleLabel}
-              </p>
-              <h2 className="mt-3 font-heading text-4xl leading-tight text-soft md:text-5xl">
-                {page.ctaTitle}
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-fog">
-                {page.ctaCopy}
-              </p>
-              <Link
-                href={`${ROUTES[locale].home}#tour`}
-                className="mt-5 inline-flex text-sm font-bold text-lantern underline-offset-4 hover:underline"
-              >
-                {page.tourLink}
-              </Link>
+        <FadeInSections as="div">
+          <section className="border-y border-volcanic/15 bg-gradient-to-br from-jungle via-night to-[#020b08]">
+            <div className="section-shell grid gap-8 py-14 md:grid-cols-[1fr_auto] md:items-center md:py-16">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-lantern">
+                  {scheduleLabel}
+                </p>
+                <h2 className="mt-3 font-heading text-4xl leading-tight text-soft md:text-5xl">
+                  {page.ctaTitle}
+                </h2>
+                <p className="mt-4 max-w-2xl text-base leading-8 text-fog">
+                  {page.ctaCopy}
+                </p>
+                <Link
+                  href={`${ROUTES[locale].home}#tour`}
+                  className="mt-5 inline-flex text-sm font-bold text-lantern underline-offset-4 hover:underline"
+                >
+                  {page.tourLink}
+                </Link>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+                <PeekBookingButton
+                  locale={locale}
+                  label={page.ctaPrimary}
+                  showArrow
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-lantern px-6 py-4 text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
+                />
+                <WhatsAppButton
+                  locale={locale}
+                  label={page.ctaSecondary}
+                  source="faq"
+                />
+              </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
-              <PeekBookingButton
-                locale={locale}
-                label={page.ctaPrimary}
-                showArrow
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-lantern px-6 py-4 text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
-              />
-              <WhatsAppButton
-                locale={locale}
-                label={page.ctaSecondary}
-                source="faq"
-              />
-            </div>
-          </div>
-        </section>
+          </section>
+        </FadeInSections>
       </main>
       <Footer locale={locale} dict={dict} />
       <SeoJsonLd
