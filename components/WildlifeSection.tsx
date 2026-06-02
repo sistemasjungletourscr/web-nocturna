@@ -2,6 +2,7 @@
 
 import { PointerEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { IMAGES } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
@@ -153,162 +154,167 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
     else showPrevious();
   }
 
-  return (
-    <section className="section-shell py-16 md:py-24" aria-label="Wildlife photo gallery">
-      <div className="relative overflow-hidden rounded-lg border border-volcanic/15 bg-jungle shadow-glass">
-        <div
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-          className="group relative block aspect-[4/5] w-full touch-pan-y overflow-hidden text-left sm:aspect-[16/10] lg:aspect-[16/8]"
-          role="region"
-          aria-roledescription="carousel"
-          aria-label={
-            dict.locale === "es"
-              ? "Carrusel de fotos de fauna nocturna"
-              : "Nocturnal wildlife photo carousel"
-          }
-        >
-          {galleryImages.map((image, index) => (
-            <Image
-              key={image.src}
-              src={image.src}
-              alt={index === activeIndex ? image.alt : ""}
-              fill
-              sizes="100vw"
-              priority={index === 0}
-              className={`object-cover transition duration-700 ease-out group-hover:scale-[1.03] ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-night via-night/45 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-night/88 via-night/35 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="rounded-md border border-volcanic/20 bg-night/55 px-4 py-3 text-sm text-volcanic backdrop-blur">
-                {activeImage[captionKey]}
-              </p>
-              <button
-                type="button"
-                onPointerDown={(event) => event.stopPropagation()}
-                onPointerUp={(event) => event.stopPropagation()}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setLightboxIndex(activeIndex);
-                }}
-                className="inline-flex items-center gap-2 rounded-md bg-lantern px-4 py-3 text-sm font-bold text-night transition hover:bg-[#ffd06a]"
-              >
-                <Maximize2 aria-hidden="true" size={17} />
-                {dict.locale === "es" ? "Abrir galería" : "Open gallery"}
-              </button>
-            </div>
-          </div>
-          <button
-            type="button"
-            onPointerDown={(event) => event.stopPropagation()}
-            onPointerUp={(event) => event.stopPropagation()}
-            onClick={showPreviousSlide}
-            className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/65 p-3 text-soft backdrop-blur transition hover:bg-lantern hover:text-night md:inline-flex"
-            aria-label={dict.locale === "es" ? "Imagen anterior" : "Previous image"}
+  const lightbox =
+    lightboxIndex !== null
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-[9999] h-dvh w-dvw overflow-hidden bg-night/96 backdrop-blur-md"
+            role="dialog"
+            aria-modal="true"
+            aria-label={dict.locale === "es" ? "Galeria de fotos" : "Photo gallery"}
+            onClick={(event) => {
+              if (event.currentTarget === event.target) setLightboxIndex(null);
+            }}
           >
-            <ChevronLeft aria-hidden="true" size={24} />
-          </button>
-          <button
-            type="button"
-            onPointerDown={(event) => event.stopPropagation()}
-            onPointerUp={(event) => event.stopPropagation()}
-            onClick={showNextSlide}
-            className="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/65 p-3 text-soft backdrop-blur transition hover:bg-lantern hover:text-night md:inline-flex"
-            aria-label={dict.locale === "es" ? "Imagen siguiente" : "Next image"}
-          >
-            <ChevronRight aria-hidden="true" size={24} />
-          </button>
-        </div>
-
-        <div className="hidden gap-2 border-t border-volcanic/15 bg-night/70 p-3 sm:grid sm:grid-cols-4 lg:grid-cols-7">
-          {galleryImages.map((image, index) => (
             <button
-              key={image.src}
               type="button"
-              onClick={() => setActiveIndex(index)}
-              className={`group relative aspect-[5/4] overflow-hidden rounded-md border text-left transition ${
-                index === activeIndex
-                  ? "border-lantern"
-                  : "border-volcanic/15 hover:border-lantern/60"
-              }`}
-              aria-label={image[captionKey]}
+              onClick={() => setLightboxIndex(null)}
+              className="absolute right-3 top-3 z-20 rounded-md border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4 sm:top-4"
+              aria-label={dict.locale === "es" ? "Cerrar galeria" : "Close gallery"}
             >
-              <Image
-                src={image.src}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 150px, 25vw"
-                className="object-cover transition duration-500 group-hover:scale-105"
-              />
-              <span className="absolute inset-0 bg-gradient-to-t from-night/90 via-transparent to-transparent" />
-              <span className="absolute bottom-2 left-2 right-2 line-clamp-2 text-[11px] font-semibold leading-4 text-soft">
-                {image[captionKey]}
-              </span>
+              <X aria-hidden="true" size={22} />
             </button>
-          ))}
-        </div>
-      </div>
-
-      {lightboxIndex !== null ? (
-        <div
-          className="fixed inset-0 z-[9999] flex h-dvh w-dvw items-center justify-center bg-night/92 px-3 py-16 backdrop-blur-md sm:p-4"
-          role="dialog"
-          aria-modal="true"
-          onClick={(event) => {
-            if (event.currentTarget === event.target) setLightboxIndex(null);
-          }}
-          aria-label={dict.locale === "es" ? "Galería de fotos" : "Photo gallery"}
-        >
-          <button
-            type="button"
-            onClick={() => setLightboxIndex(null)}
-            className="absolute right-3 top-3 z-20 rounded-md border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4 sm:top-4"
-            aria-label={dict.locale === "es" ? "Cerrar galería" : "Close gallery"}
-          >
-            <X aria-hidden="true" size={22} />
-          </button>
-          <button
-            type="button"
-            onClick={showPrevious}
-            className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:left-4"
-            aria-label={dict.locale === "es" ? "Foto anterior" : "Previous photo"}
-          >
-            <ChevronLeft aria-hidden="true" size={28} />
-          </button>
-          <figure
-            className="animate-[fadeIn_240ms_ease-out] relative z-10 w-full max-w-6xl touch-pan-y"
-            onClick={(event) => event.stopPropagation()}
-            onPointerDown={handleLightboxPointerDown}
-            onPointerUp={handleLightboxPointerUp}
-          >
-            <div className="relative h-[min(72dvh,620px)] max-h-[calc(100dvh-120px)] overflow-hidden rounded-lg border border-volcanic/20 bg-black sm:aspect-[16/10] sm:h-auto sm:max-h-none">
+            <button
+              type="button"
+              onClick={showPrevious}
+              className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:left-4"
+              aria-label={dict.locale === "es" ? "Foto anterior" : "Previous photo"}
+            >
+              <ChevronLeft aria-hidden="true" size={28} />
+            </button>
+            <figure
+              className="animate-[fadeIn_240ms_ease-out] relative h-dvh w-dvw touch-pan-y"
+              onClick={(event) => event.stopPropagation()}
+              onPointerDown={handleLightboxPointerDown}
+              onPointerUp={handleLightboxPointerUp}
+            >
               <Image
                 src={galleryImages[lightboxIndex].src}
                 alt={galleryImages[lightboxIndex].alt}
                 fill
                 sizes="100vw"
-                className="object-contain"
+                className="object-contain p-2 pb-24 pt-16 sm:p-10"
               />
-            </div>
-            <figcaption className="mx-auto mt-3 max-w-3xl rounded-md border border-volcanic/20 bg-night/85 px-4 py-3 text-center text-sm leading-6 text-volcanic sm:mt-4 sm:bg-white/8">
-              {galleryImages[lightboxIndex][captionKey]}
-            </figcaption>
-          </figure>
-          <button
-            type="button"
-            onClick={showNext}
-            className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4"
-            aria-label={dict.locale === "es" ? "Foto siguiente" : "Next photo"}
+              <figcaption className="absolute bottom-3 left-1/2 z-20 max-h-20 w-[calc(100%-1.5rem)] max-w-3xl -translate-x-1/2 overflow-hidden rounded-md border border-volcanic/20 bg-night/85 px-4 py-3 text-center text-sm leading-6 text-volcanic shadow-lg sm:bottom-5 sm:max-h-none">
+                {galleryImages[lightboxIndex][captionKey]}
+              </figcaption>
+            </figure>
+            <button
+              type="button"
+              onClick={showNext}
+              className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4"
+              aria-label={dict.locale === "es" ? "Foto siguiente" : "Next photo"}
+            >
+              <ChevronRight aria-hidden="true" size={28} />
+            </button>
+          </div>,
+          document.body
+        )
+      : null;
+
+  return (
+    <>
+      <section className="section-shell py-16 md:py-24" aria-label="Wildlife photo gallery">
+        <div className="relative overflow-hidden rounded-lg border border-volcanic/15 bg-jungle shadow-glass">
+          <div
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            className="group relative block aspect-[4/5] w-full touch-pan-y overflow-hidden text-left sm:aspect-[16/10] lg:aspect-[16/8]"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label={
+              dict.locale === "es"
+                ? "Carrusel de fotos de fauna nocturna"
+                : "Nocturnal wildlife photo carousel"
+            }
           >
-            <ChevronRight aria-hidden="true" size={28} />
-          </button>
+            {galleryImages.map((image, index) => (
+              <Image
+                key={image.src}
+                src={image.src}
+                alt={index === activeIndex ? image.alt : ""}
+                fill
+                sizes="100vw"
+                priority={index === 0}
+                className={`object-cover transition duration-700 ease-out group-hover:scale-[1.03] ${
+                  index === activeIndex ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
+            <div className="absolute inset-0 bg-gradient-to-t from-night via-night/45 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-night/88 via-night/35 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="rounded-md border border-volcanic/20 bg-night/55 px-4 py-3 text-sm text-volcanic backdrop-blur">
+                  {activeImage[captionKey]}
+                </p>
+                <button
+                  type="button"
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onPointerUp={(event) => event.stopPropagation()}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setLightboxIndex(activeIndex);
+                  }}
+                  className="inline-flex items-center gap-2 rounded-md bg-lantern px-4 py-3 text-sm font-bold text-night transition hover:bg-[#ffd06a]"
+                >
+                  <Maximize2 aria-hidden="true" size={17} />
+                  {dict.locale === "es" ? "Abrir galería" : "Open gallery"}
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              onPointerDown={(event) => event.stopPropagation()}
+              onPointerUp={(event) => event.stopPropagation()}
+              onClick={showPreviousSlide}
+              className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/65 p-3 text-soft backdrop-blur transition hover:bg-lantern hover:text-night md:inline-flex"
+              aria-label={dict.locale === "es" ? "Imagen anterior" : "Previous image"}
+            >
+              <ChevronLeft aria-hidden="true" size={24} />
+            </button>
+            <button
+              type="button"
+              onPointerDown={(event) => event.stopPropagation()}
+              onPointerUp={(event) => event.stopPropagation()}
+              onClick={showNextSlide}
+              className="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/65 p-3 text-soft backdrop-blur transition hover:bg-lantern hover:text-night md:inline-flex"
+              aria-label={dict.locale === "es" ? "Imagen siguiente" : "Next image"}
+            >
+              <ChevronRight aria-hidden="true" size={24} />
+            </button>
+          </div>
+
+          <div className="hidden gap-2 border-t border-volcanic/15 bg-night/70 p-3 sm:grid sm:grid-cols-4 lg:grid-cols-7">
+            {galleryImages.map((image, index) => (
+              <button
+                key={image.src}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`group relative aspect-[5/4] overflow-hidden rounded-md border text-left transition ${
+                  index === activeIndex
+                    ? "border-lantern"
+                    : "border-volcanic/15 hover:border-lantern/60"
+                }`}
+                aria-label={image[captionKey]}
+              >
+                <Image
+                  src={image.src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 150px, 25vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                />
+                <span className="absolute inset-0 bg-gradient-to-t from-night/90 via-transparent to-transparent" />
+                <span className="absolute bottom-2 left-2 right-2 line-clamp-2 text-[11px] font-semibold leading-4 text-soft">
+                  {image[captionKey]}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
-      ) : null}
-    </section>
+      </section>
+      {lightbox}
+    </>
   );
 }
