@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MapPin, Mountain, Phone } from "lucide-react";
+import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { ROUTES, TOUR, type Locale, whatsappUrl } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { trackEvent, whatsappParams } from "@/tracking/events";
@@ -45,11 +46,14 @@ export function Footer({
     >
       <div className="section-shell grid gap-10 py-12 md:grid-cols-[1.1fr_0.8fr_1fr] md:py-14">
         <div>
-          <div className="flex items-center gap-3 text-soft">
-            <span className="rounded-md bg-lantern/12 p-2 text-lantern">
-              <Mountain aria-hidden="true" size={22} />
-            </span>
-            <strong className="text-lg">Arenal Forest Night Hike</strong>
+          <div className="relative h-24 w-24 overflow-hidden rounded-full sm:h-28 sm:w-28">
+            <Image
+              src="/images/arenal-night-hike-favicon.svg"
+              alt="Arenal Forest Night Hike"
+              width={643}
+              height={639}
+              className="h-full w-full object-contain"
+            />
           </div>
           <p className="mt-4 max-w-md text-sm leading-7 text-fog">
             {dict.footer.tagline}

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Menu, Mountain, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ROUTES, type Locale } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { BookingButton } from "@/components/BookingButton";
@@ -36,13 +37,19 @@ export function Header({ locale, dict, className, page = "home" }: HeaderProps) 
         .join(" ")}
     >
       <div className="section-shell flex min-h-[76px] items-center justify-between gap-4">
-        <Link href={home} className="flex items-center gap-3 text-soft">
-          <span className="rounded-md bg-lantern/12 p-2 text-lantern">
-            <Mountain aria-hidden="true" size={22} />
-          </span>
-          <span className="max-w-[180px] text-sm font-black leading-tight tracking-wide sm:max-w-none">
-            Arenal Forest Night Hike
-          </span>
+        <Link
+          href={home}
+          className="flex h-14 w-[150px] shrink-0 items-center sm:w-[175px] lg:w-[195px]"
+          aria-label="Arenal Forest Night Hike"
+        >
+          <Image
+            src="/images/arenal-night-hike-header.svg"
+            alt="Arenal Forest Night Hike"
+            width={1034}
+            height={394}
+            priority
+            className="h-full w-full object-contain object-left"
+          />
         </Link>
 
         <nav className="hidden items-center gap-5 text-sm text-fog lg:flex" aria-label="Main">

@@ -45,7 +45,21 @@ const body = localFont({
 export const metadata: Metadata = {
   applicationName: "Arenal Forest Night Hike",
   category: "travel",
-  creator: "Arenal Forest Night Hike"
+  creator: "Arenal Forest Night Hike",
+  icons: {
+    icon: [
+      {
+        url: "/images/arenal-night-hike-favicon.svg",
+        type: "image/svg+xml"
+      }
+    ],
+    shortcut: [
+      {
+        url: "/images/arenal-night-hike-favicon.svg",
+        type: "image/svg+xml"
+      }
+    ]
+  }
 };
 
 export const viewport: Viewport = {
