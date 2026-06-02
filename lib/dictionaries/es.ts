@@ -38,7 +38,7 @@ export const es = {
     eyebrow: "La Fortuna, Costa Rica",
     headline: TOUR.name,
     subheadline:
-      "Explora el verdadero bosque nocturno del Volcán Arenal en una caminata guiada por las faldas del volcán.",
+      "Explora el verdadero bosque primario del Volcán Arenal en una caminata nocturno guiada por las faldas del volcán.",
     copy: "No es un sendero plano. Es un hike nocturno real por terreno elevado, senderos naturales y el sonido auténtico del bosque del Arenal al caer la noche.",
     primary: "Reservar ahora",
     secondary: "Consultar por WhatsApp",
@@ -107,7 +107,7 @@ export const es = {
   },
   booking: {
     title: "Reserva tu Arenal Forest Night Hike",
-    copy: "Reserva tu espacio para el hike nocturno de las 6:00 PM. Los grupos son pequeños para mantener una experiencia segura, personalizada y enfocada en la observación de fauna.",
+    copy: "Reserva tu espacio para el hike nocturno de las 6:00 PM. Los grupos son pequeños por guía para mantener una experiencia segura, personalizada y enfocada en la observación de fauna.",
     button: "Reservar ahora"
   },
   reviews: {
@@ -119,7 +119,7 @@ export const es = {
   },
   contact: {
     title: "Contacto y Localización",
-    copy: "¿Tienes preguntas antes de reservar? Escríbenos, llama, envía un correo o consulta directamente por WhatsApp.",
+    copy: "¿Tienes preguntas antes de reservar? Escríbenos, envía un correo o consulta directamente por WhatsApp.",
     formTitle: "Enviar Mensaje",
     name: "Nombre",
     email: "Email",

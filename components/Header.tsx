@@ -62,7 +62,12 @@ export function Header({ locale, dict, className, page = "home" }: HeaderProps) 
 
         <div className="hidden items-center gap-2 lg:flex">
           <LanguageSwitcher locale={locale} page={page} />
-          <BookingButton locale={locale} label={dict.nav.book} className="px-4 py-3" />
+          <BookingButton
+            locale={locale}
+            label={dict.nav.book}
+            className="px-4 py-3"
+            source="header"
+          />
         </div>
 
         <button
@@ -91,7 +96,7 @@ export function Header({ locale, dict, className, page = "home" }: HeaderProps) 
             ))}
             <div className="mt-2 flex flex-wrap gap-2">
               <LanguageSwitcher locale={locale} page={page} />
-              <BookingButton locale={locale} label={dict.nav.book} />
+              <BookingButton locale={locale} label={dict.nav.book} source="header" />
             </div>
           </nav>
         </div>

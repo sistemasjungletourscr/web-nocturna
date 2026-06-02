@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { CalendarDays, TicketPercent } from "lucide-react";
 import { PeekBookingButton } from "@/components/PeekBookingButton";
 import { TOUR, type Locale } from "@/lib/constants";
@@ -19,11 +19,33 @@ export function PeekBookingWidget({
   copy,
   button
 }: PeekBookingWidgetProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const hasTrackedView = useRef(false);
+
   useEffect(() => {
-    trackEvent("view_booking_widget", {
-      booking_engine: "Peek Pro",
-      language: locale
-    });
+    const section = sectionRef.current;
+    if (!section || hasTrackedView.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || hasTrackedView.current) return;
+
+        hasTrackedView.current = true;
+        trackEvent("view_booking_widget", {
+          booking_engine: "Peek Pro",
+          language: locale,
+          source_section: "booking_widget"
+        });
+        observer.disconnect();
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [locale]);
 
   const offerLabel = locale === "es" ? "Oferta" : "Offer";
@@ -32,7 +54,11 @@ export function PeekBookingWidget({
     locale === "es" ? "Adultos y ni\u00f1os" : "Adults & Children";
 
   return (
-    <section id="booking" className="anchor-offset section-shell py-16 md:py-24">
+    <section
+      ref={sectionRef}
+      id="booking"
+      className="anchor-offset section-shell py-16 md:py-24"
+    >
       <div className="glass-panel rounded-lg p-6 text-center sm:p-8 md:p-10">
         <div className="mx-auto max-w-3xl">
           <div className="mb-5 inline-flex rounded-md bg-lantern/12 p-3 text-lantern">
@@ -70,6 +96,7 @@ export function PeekBookingWidget({
           <PeekBookingButton
             locale={locale}
             label={button}
+            source="booking_widget"
             className="mt-7 inline-flex w-full max-w-xl items-center justify-center rounded-md bg-lantern px-5 py-4 text-center text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
           />
         </div>

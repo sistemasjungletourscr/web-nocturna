@@ -8,13 +8,23 @@ type BookingButtonProps = {
   locale: Locale;
   label: string;
   className?: string;
+  source?: "header" | "hero" | "site_cta";
 };
 
-export function BookingButton({ locale, label, className = "" }: BookingButtonProps) {
+export function BookingButton({
+  locale,
+  label,
+  className = "",
+  source = "site_cta"
+}: BookingButtonProps) {
   function handleClick() {
-    trackEvent("click_book_now", bookingCtaParams(locale));
+    trackEvent("click_book_now", bookingCtaParams(locale, source));
     document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-    trackEvent("scroll_to_booking", { language: locale });
+    trackEvent("scroll_to_booking", {
+      language: locale,
+      source_section: source,
+      booking_engine: "Peek Pro"
+    });
   }
 
   return (

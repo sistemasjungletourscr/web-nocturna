@@ -25,7 +25,12 @@ export function ContactSection({
           <div className="mt-7 grid gap-3 text-fog">
             <a
               href={`tel:${TOUR.phoneHref}`}
-              onClick={() => trackEvent("click_call", { language: locale })}
+              onClick={() =>
+                trackEvent("click_call", {
+                  language: locale,
+                  source_section: "contact"
+                })
+              }
               className="flex items-center gap-3 hover:text-lantern"
             >
               <Phone aria-hidden="true" size={18} />
@@ -33,7 +38,12 @@ export function ContactSection({
             </a>
             <a
               href={`mailto:${TOUR.email}`}
-              onClick={() => trackEvent("click_email", { language: locale })}
+              onClick={() =>
+                trackEvent("click_email", {
+                  language: locale,
+                  source_section: "contact"
+                })
+              }
               className="flex items-center gap-3 hover:text-lantern"
             >
               <Mail aria-hidden="true" size={18} />
@@ -63,7 +73,12 @@ export function ContactSection({
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            onLoad={() => trackEvent("map_interaction", { language: locale })}
+            onLoad={() =>
+              trackEvent("view_map_embed", {
+                language: locale,
+                source_section: "contact"
+              })
+            }
           />
         </div>
       </div>

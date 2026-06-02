@@ -131,7 +131,10 @@ export function ReviewsSection({
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
-                trackEvent("outbound_tripadvisor_click", { language: locale })
+                trackEvent("outbound_tripadvisor_click", {
+                  language: locale,
+                  source_section: "reviews_header"
+                })
               }
               className="inline-flex items-center justify-center gap-2 rounded-md border border-lantern/50 px-5 py-3 text-sm font-bold text-lantern transition hover:bg-lantern hover:text-night"
             >
@@ -187,7 +190,8 @@ export function ReviewsSection({
                             onClick={() =>
                               trackEvent("outbound_tripadvisor_click", {
                                 language: locale,
-                                source_section: "reviews_card"
+                                source_section: "reviews_card",
+                                review_id: review.id
                               })
                             }
                             className="text-sm font-bold text-lantern underline-offset-4 hover:underline"

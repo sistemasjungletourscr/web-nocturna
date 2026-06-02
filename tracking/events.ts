@@ -3,10 +3,11 @@
 import { TOUR, type Locale } from "@/lib/constants";
 
 type TrackingParams = Record<string, string | number | boolean | undefined>;
+type DataLayerEvent = TrackingParams & { event: string };
 
 declare global {
   interface Window {
-    dataLayer?: TrackingParams[];
+    dataLayer?: DataLayerEvent[];
     gtag?: (...args: unknown[]) => void;
   }
 }
@@ -14,19 +15,18 @@ declare global {
 export function trackEvent(event: string, params: TrackingParams = {}) {
   if (typeof window === "undefined") return;
 
-  const payload = {
-    event,
+  const eventParams = {
     tour_name: TOUR.name,
     ...params
   };
 
-  window.dataLayer?.push(payload);
-  window.gtag?.("event", event, params);
+  window.dataLayer?.push({ event, ...eventParams });
+  window.gtag?.("event", event, eventParams);
 }
 
-export function bookingCtaParams(locale: Locale) {
+export function bookingCtaParams(locale: Locale, sourceSection: string) {
   return {
-    tour_name: TOUR.name,
+    source_section: sourceSection,
     location: "La Fortuna, Costa Rica",
     language: locale,
     price: TOUR.price,
@@ -34,9 +34,9 @@ export function bookingCtaParams(locale: Locale) {
   };
 }
 
-export function peekBookingParams(locale: Locale) {
+export function peekBookingParams(locale: Locale, sourceSection: string) {
   return {
-    tour_name: TOUR.name,
+    source_section: sourceSection,
     booking_engine: "Peek Pro",
     schedule: "Daily 6:00 PM",
     language: locale
@@ -46,7 +46,6 @@ export function peekBookingParams(locale: Locale) {
 export function whatsappParams(locale: Locale, sourceSection: string) {
   return {
     source_section: sourceSection,
-    tour_name: TOUR.name,
     language: locale
   };
 }

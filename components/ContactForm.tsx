@@ -3,7 +3,6 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import type { Locale } from "@/lib/constants";
-import { TOUR } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { trackEvent } from "@/tracking/events";
 
@@ -50,8 +49,8 @@ export function ContactForm({
       }
 
       trackEvent("submit_contact_form", {
-        tour_name: TOUR.name,
-        language: locale
+        language: locale,
+        source_section: "contact_form"
       });
 
       form.reset();

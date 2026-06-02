@@ -40,7 +40,7 @@ export const en = {
     eyebrow: "La Fortuna, Costa Rica",
     headline: TOUR.name,
     subheadline:
-      "Explore the real night side of Arenal Volcano on a guided uphill forest hike beneath the volcano.",
+      "Explore the authentic primary rainforest of the Arenal Volcano on a guided night hike around the base of the volcano.",
     copy: "This is not a flat night walk. It is a real forest hike through elevated terrain, natural trails, and the authentic sounds of the Arenal rainforest after dark.",
     primary: "Book Your Night Hike",
     secondary: "Ask by WhatsApp",
@@ -109,7 +109,7 @@ export const en = {
   },
   booking: {
     title: "Book Your Arenal Forest Night Hike",
-    copy: "Secure your spot for the 6:00 PM night hike. Small groups are limited to keep the experience safe, personal, and wildlife-focused.",
+    copy: "Secure your spot for the 6:00 PM night hike. Small groups per guide are limited to keep the experience safe, personal, and wildlife-focused.",
     button: "Book Now"
   },
   reviews: {
@@ -121,7 +121,7 @@ export const en = {
   },
   contact: {
     title: "Contact and Meeting Area",
-    copy: "Questions before booking? Send us a message, call, email, or ask directly by WhatsApp.",
+    copy: "Questions before booking? Send us a message, email, or ask directly by WhatsApp.",
     formTitle: "Send a Message",
     name: "Name",
     email: "Email",

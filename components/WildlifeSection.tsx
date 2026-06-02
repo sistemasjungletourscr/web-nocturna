@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { IMAGES } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
+import { trackEvent } from "@/tracking/events";
 
 const galleryImages = [
   {
@@ -52,6 +53,9 @@ const galleryImages = [
   }
 ];
 
+type LightboxDirection = "next" | "previous";
+type LightboxNavigationMethod = "button" | "keyboard" | "swipe";
+
 export function WildlifeSection({ dict }: { dict: Dictionary }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -79,8 +83,8 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") setLightboxIndex(null);
-      if (event.key === "ArrowRight") showNext();
-      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext("keyboard");
+      if (event.key === "ArrowLeft") showPrevious("keyboard");
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -91,18 +95,46 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
     };
   });
 
-  function showNext() {
-    setLightboxIndex((current) =>
-      current === null ? 0 : (current + 1) % galleryImages.length
-    );
+  function openLightbox(index: number) {
+    setLightboxIndex(index);
+    trackEvent("open_wildlife_gallery", {
+      language: dict.locale,
+      source_section: "wildlife_gallery",
+      image_index: index + 1,
+      image_alt: galleryImages[index].alt
+    });
   }
 
-  function showPrevious() {
-    setLightboxIndex((current) =>
-      current === null
-        ? galleryImages.length - 1
-        : (current - 1 + galleryImages.length) % galleryImages.length
-    );
+  function navigateLightbox(
+    direction: LightboxDirection,
+    method: LightboxNavigationMethod
+  ) {
+    setLightboxIndex((current) => {
+      const currentIndex = current ?? activeIndex;
+      const nextIndex =
+        direction === "next"
+          ? (currentIndex + 1) % galleryImages.length
+          : (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+
+      trackEvent("navigate_wildlife_gallery", {
+        language: dict.locale,
+        source_section: "wildlife_gallery",
+        navigation_direction: direction,
+        navigation_method: method,
+        image_index: nextIndex + 1,
+        image_alt: galleryImages[nextIndex].alt
+      });
+
+      return nextIndex;
+    });
+  }
+
+  function showNext(method: LightboxNavigationMethod = "button") {
+    navigateLightbox("next", method);
+  }
+
+  function showPrevious(method: LightboxNavigationMethod = "button") {
+    navigateLightbox("previous", method);
   }
 
   function showNextSlide() {
@@ -150,8 +182,8 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
 
     if (Math.abs(deltaX) <= 42) return;
 
-    if (deltaX < 0) showNext();
-    else showPrevious();
+    if (deltaX < 0) showNext("swipe");
+    else showPrevious("swipe");
   }
 
   const lightbox =
@@ -176,7 +208,7 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
             </button>
             <button
               type="button"
-              onClick={showPrevious}
+              onClick={() => showPrevious("button")}
               className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:left-4"
               aria-label={dict.locale === "es" ? "Foto anterior" : "Previous photo"}
             >
@@ -201,7 +233,7 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
             </figure>
             <button
               type="button"
-              onClick={showNext}
+              onClick={() => showNext("button")}
               className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4"
               aria-label={dict.locale === "es" ? "Foto siguiente" : "Next photo"}
             >
@@ -254,7 +286,7 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
                   onPointerUp={(event) => event.stopPropagation()}
                   onClick={(event) => {
                     event.stopPropagation();
-                    setLightboxIndex(activeIndex);
+                    openLightbox(activeIndex);
                   }}
                   className="inline-flex items-center gap-2 rounded-md bg-lantern px-4 py-3 text-sm font-bold text-night transition hover:bg-[#ffd06a]"
                 >

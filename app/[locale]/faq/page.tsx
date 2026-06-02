@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CalendarDays, ChevronDown, Clock, Gauge, Users } from "lucide-react";
+import { CalendarDays, Clock, Gauge, Users } from "lucide-react";
 import { FadeInSections } from "@/components/FadeInSections";
+import { TrackedFaqCategoryLink, TrackedFaqItem } from "@/components/FaqTracking";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PeekBookingButton } from "@/components/PeekBookingButton";
@@ -101,13 +102,14 @@ export default async function FaqPage({
               </p>
               <nav className="mt-5 grid gap-2 text-sm text-fog" aria-label="FAQ categories">
                 {categoryKeys.map((categoryKey) => (
-                  <a
+                  <TrackedFaqCategoryLink
                     key={categoryKey}
-                    href={`#faq-${categoryKey}`}
-                    className="rounded-md border border-volcanic/15 bg-white/5 px-4 py-3 transition hover:border-lantern/50 hover:text-lantern"
-                  >
-                    {dict.faqCategories[categoryKey]}
-                  </a>
+                    locale={locale}
+                    category={{
+                      key: categoryKey,
+                      label: dict.faqCategories[categoryKey]
+                    }}
+                  />
                 ))}
               </nav>
               </FadeInSections>
@@ -128,21 +130,17 @@ export default async function FaqPage({
                     </h2>
                     <FadeInSections as="div" className="mt-5 grid gap-3">
                       {items.map((item, index) => (
-                        <details
+                        <TrackedFaqItem
                           key={item.q}
-                          className="group rounded-lg border border-volcanic/15 bg-white/5 p-5 open:bg-jungle/55"
-                          open={index === 0 && categoryKey === "tour"}
-                        >
-                          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-lg font-bold text-soft">
-                            <span>{item.q}</span>
-                            <ChevronDown
-                              aria-hidden="true"
-                              className="mt-1 shrink-0 text-lantern transition group-open:rotate-180"
-                              size={20}
-                            />
-                          </summary>
-                          <p className="mt-4 text-base leading-8 text-fog">{item.a}</p>
-                        </details>
+                          question={item.q}
+                          answer={item.a}
+                          locale={locale}
+                          category={{
+                            key: categoryKey,
+                            label: dict.faqCategories[categoryKey]
+                          }}
+                          openByDefault={index === 0 && categoryKey === "tour"}
+                        />
                       ))}
                     </FadeInSections>
                   </section>
@@ -177,6 +175,7 @@ export default async function FaqPage({
                   locale={locale}
                   label={page.ctaPrimary}
                   showArrow
+                  source="faq_cta"
                   className="inline-flex items-center justify-center gap-2 rounded-md bg-lantern px-6 py-4 text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
                 />
                 <WhatsAppButton

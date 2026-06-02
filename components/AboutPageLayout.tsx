@@ -141,6 +141,7 @@ export function AboutPageLayout({ locale, dict }: AboutPageLayoutProps) {
                   locale={locale}
                   label={about.ctaPrimary}
                   showArrow
+                  source="about_cta"
                   className="inline-flex items-center justify-center gap-2 rounded-md bg-lantern px-6 py-4 text-base font-bold text-night shadow-glow transition hover:-translate-y-0.5 hover:bg-[#ffd06a]"
                 />
                 <WhatsAppButton

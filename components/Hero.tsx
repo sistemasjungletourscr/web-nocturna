@@ -59,7 +59,7 @@ export function Hero({ locale, dict, contentClassName }: HeroProps) {
             {dict.hero.copy}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <BookingButton locale={locale} label={dict.hero.primary} />
+            <BookingButton locale={locale} label={dict.hero.primary} source="hero" />
             <WhatsAppButton
               locale={locale}
               label={dict.hero.secondary}

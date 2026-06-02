@@ -80,10 +80,10 @@ export function Footer({
             <span>{TOUR.location}</span>
           </p>
           <a
-            href={whatsappUrl(locale, "contact")}
+            href={whatsappUrl(locale, "footer")}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent("click_whatsapp", whatsappParams(locale, "contact"))}
+            onClick={() => trackEvent("click_whatsapp", whatsappParams(locale, "footer"))}
             className="flex items-center gap-3 transition hover:text-lantern"
           >
             <Phone aria-hidden="true" className="shrink-0 text-lantern" size={18} />
@@ -91,7 +91,12 @@ export function Footer({
           </a>
           <a
             href={`mailto:${TOUR.email}`}
-            onClick={() => trackEvent("click_email", { language: locale })}
+            onClick={() =>
+              trackEvent("click_email", {
+                language: locale,
+                source_section: "footer"
+              })
+            }
             className="flex items-center gap-3 break-all transition hover:text-lantern"
           >
             <Mail aria-hidden="true" className="shrink-0 text-lantern" size={18} />

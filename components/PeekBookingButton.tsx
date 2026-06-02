@@ -22,13 +22,15 @@ type PeekBookingButtonProps = {
   label: string;
   className?: string;
   showArrow?: boolean;
+  source?: "booking_widget" | "faq_cta" | "about_cta";
 };
 
 export function PeekBookingButton({
   locale,
   label,
   className,
-  showArrow = false
+  showArrow = false,
+  source = "booking_widget"
 }: PeekBookingButtonProps) {
   useEffect(() => {
     window._peekConfig = { key: PEEK_KEY };
@@ -61,7 +63,7 @@ export function PeekBookingButton({
       className={className}
       data-button-text={label}
       onClick={() =>
-        trackEvent("click_peekpro_booking", peekBookingParams(locale))
+        trackEvent("click_peekpro_booking", peekBookingParams(locale, source))
       }
     >
       {label}
