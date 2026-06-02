@@ -7,11 +7,18 @@ import { GoogleTagManager } from "@/components/GoogleTagManager";
 const STORAGE_KEY = "afnh_cookie_consent";
 
 export function TrackingManager() {
-  const [enabled, setEnabled] = useState(false);
+  const [analyticsConsentGranted, setAnalyticsConsentGranted] = useState(false);
 
   useEffect(() => {
     const readConsent = () => {
-      setEnabled(window.localStorage.getItem(STORAGE_KEY) === "accepted");
+      const accepted = window.localStorage.getItem(STORAGE_KEY) === "accepted";
+      setAnalyticsConsentGranted(accepted);
+      window.gtag?.("consent", "update", {
+        analytics_storage: accepted ? "granted" : "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
     };
 
     readConsent();
@@ -21,8 +28,8 @@ export function TrackingManager() {
 
   return (
     <>
-      <GoogleTagManager enabled={enabled} />
-      <GoogleAnalytics enabled={enabled} />
+      <GoogleTagManager enabled={analyticsConsentGranted} />
+      <GoogleAnalytics analyticsConsentGranted={analyticsConsentGranted} />
     </>
   );
 }
