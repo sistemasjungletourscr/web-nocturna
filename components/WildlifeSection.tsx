@@ -56,6 +56,7 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const pointerStartX = useRef<number | null>(null);
   const pointerMoved = useRef(false);
+  const lightboxPointerStartX = useRef<number | null>(null);
   const activeImage = galleryImages[activeIndex];
   const captionKey = dict.locale === "es" ? "captionEs" : "captionEn";
 
@@ -134,6 +135,22 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
     if (event.pointerType === "mouse" && !pointerMoved.current) {
       showNextSlide();
     }
+  }
+
+  function handleLightboxPointerDown(event: PointerEvent<HTMLDivElement>) {
+    lightboxPointerStartX.current = event.clientX;
+  }
+
+  function handleLightboxPointerUp(event: PointerEvent<HTMLDivElement>) {
+    if (lightboxPointerStartX.current === null) return;
+
+    const deltaX = event.clientX - lightboxPointerStartX.current;
+    lightboxPointerStartX.current = null;
+
+    if (Math.abs(deltaX) <= 42) return;
+
+    if (deltaX < 0) showNext();
+    else showPrevious();
   }
 
   return (
@@ -239,15 +256,18 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
 
       {lightboxIndex !== null ? (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-night/92 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[9999] flex h-dvh w-dvw items-center justify-center bg-night/92 px-3 py-16 backdrop-blur-md sm:p-4"
           role="dialog"
           aria-modal="true"
+          onClick={(event) => {
+            if (event.currentTarget === event.target) setLightboxIndex(null);
+          }}
           aria-label={dict.locale === "es" ? "Galería de fotos" : "Photo gallery"}
         >
           <button
             type="button"
             onClick={() => setLightboxIndex(null)}
-            className="absolute right-4 top-4 rounded-md border border-volcanic/25 bg-white/8 p-3 text-soft transition hover:bg-white/15"
+            className="absolute right-3 top-3 z-20 rounded-md border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4 sm:top-4"
             aria-label={dict.locale === "es" ? "Cerrar galería" : "Close gallery"}
           >
             <X aria-hidden="true" size={22} />
@@ -255,13 +275,18 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
           <button
             type="button"
             onClick={showPrevious}
-            className="absolute left-4 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-white/8 p-3 text-soft transition hover:bg-white/15 sm:block"
+            className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:left-4"
             aria-label={dict.locale === "es" ? "Foto anterior" : "Previous photo"}
           >
             <ChevronLeft aria-hidden="true" size={28} />
           </button>
-          <figure className="animate-[fadeIn_240ms_ease-out] w-full max-w-6xl">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-volcanic/20 bg-black sm:aspect-[16/10]">
+          <figure
+            className="animate-[fadeIn_240ms_ease-out] relative z-10 w-full max-w-6xl touch-pan-y"
+            onClick={(event) => event.stopPropagation()}
+            onPointerDown={handleLightboxPointerDown}
+            onPointerUp={handleLightboxPointerUp}
+          >
+            <div className="relative h-[min(72dvh,620px)] max-h-[calc(100dvh-120px)] overflow-hidden rounded-lg border border-volcanic/20 bg-black sm:aspect-[16/10] sm:h-auto sm:max-h-none">
               <Image
                 src={galleryImages[lightboxIndex].src}
                 alt={galleryImages[lightboxIndex].alt}
@@ -270,34 +295,18 @@ export function WildlifeSection({ dict }: { dict: Dictionary }) {
                 className="object-contain"
               />
             </div>
-            <figcaption className="mx-auto mt-4 max-w-3xl rounded-md border border-volcanic/20 bg-white/8 px-4 py-3 text-center text-sm leading-6 text-volcanic">
+            <figcaption className="mx-auto mt-3 max-w-3xl rounded-md border border-volcanic/20 bg-night/85 px-4 py-3 text-center text-sm leading-6 text-volcanic sm:mt-4 sm:bg-white/8">
               {galleryImages[lightboxIndex][captionKey]}
             </figcaption>
           </figure>
           <button
             type="button"
             onClick={showNext}
-            className="absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-full border border-volcanic/25 bg-white/8 p-3 text-soft transition hover:bg-white/15 sm:block"
+            className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full border border-volcanic/25 bg-night/85 p-3 text-soft shadow-lg transition hover:bg-white/15 sm:right-4"
             aria-label={dict.locale === "es" ? "Foto siguiente" : "Next photo"}
           >
             <ChevronRight aria-hidden="true" size={28} />
           </button>
-          <div className="absolute bottom-4 flex gap-3 sm:hidden">
-            <button
-              type="button"
-              onClick={showPrevious}
-              className="rounded-md border border-volcanic/25 bg-white/8 px-4 py-3 text-soft"
-            >
-              <ChevronLeft aria-hidden="true" size={24} />
-            </button>
-            <button
-              type="button"
-              onClick={showNext}
-              className="rounded-md border border-volcanic/25 bg-white/8 px-4 py-3 text-soft"
-            >
-              <ChevronRight aria-hidden="true" size={24} />
-            </button>
-          </div>
         </div>
       ) : null}
     </section>

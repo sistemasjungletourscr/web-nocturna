@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { Mail, MapPin, Mountain, Phone } from "lucide-react";
-import { ROUTES, TOUR, type Locale } from "@/lib/constants";
+import { ROUTES, TOUR, type Locale, whatsappUrl } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
-import { trackEvent } from "@/tracking/events";
+import { trackEvent, whatsappParams } from "@/tracking/events";
 
 export function Footer({
   locale,
@@ -76,8 +76,10 @@ export function Footer({
             <span>{TOUR.location}</span>
           </p>
           <a
-            href={`tel:${TOUR.phoneHref}`}
-            onClick={() => trackEvent("click_call", { language: locale })}
+            href={whatsappUrl(locale, "contact")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent("click_whatsapp", whatsappParams(locale, "contact"))}
             className="flex items-center gap-3 transition hover:text-lantern"
           >
             <Phone aria-hidden="true" className="shrink-0 text-lantern" size={18} />
