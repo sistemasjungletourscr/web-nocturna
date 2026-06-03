@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { ROUTES, TOUR, type Locale, whatsappUrl } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { trackEvent, whatsappParams } from "@/tracking/events";
@@ -83,10 +83,15 @@ export function Footer({
             href={whatsappUrl(locale, "footer")}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={
+              locale === "es"
+                ? `Escribir por WhatsApp al ${TOUR.phoneDisplay}`
+                : `Message on WhatsApp at ${TOUR.phoneDisplay}`
+            }
             onClick={() => trackEvent("click_whatsapp", whatsappParams(locale, "footer"))}
             className="flex items-center gap-3 transition hover:text-lantern"
           >
-            <Phone aria-hidden="true" className="shrink-0 text-lantern" size={18} />
+            <MessageCircle aria-hidden="true" className="shrink-0 text-lantern" size={18} />
             {TOUR.phoneDisplay}
           </a>
           <a

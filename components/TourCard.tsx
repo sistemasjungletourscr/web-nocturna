@@ -42,17 +42,15 @@ export function TourCard({ dict }: { dict: Dictionary }) {
               const Icon = factIcons[index];
               return (
                 <div key={label} className="border-b border-volcanic/10 p-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <dt className="text-sm font-bold text-lantern">{label}</dt>
-                      <dd className="mt-2 text-base leading-6 text-soft">{value}</dd>
-                    </div>
+                  <dt className="flex items-start justify-between gap-4 text-sm font-bold text-lantern">
+                    <span>{label}</span>
                     <Icon
                       aria-hidden="true"
                       className="mt-1 shrink-0 text-lantern"
                       size={23}
                     />
-                  </div>
+                  </dt>
+                  <dd className="mt-2 text-base leading-6 text-soft">{value}</dd>
                 </div>
               );
             })}

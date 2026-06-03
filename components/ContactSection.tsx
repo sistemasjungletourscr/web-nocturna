@@ -1,11 +1,11 @@
 "use client";
 
-import { Mail, MapPin, Phone } from "lucide-react";
-import { TOUR, type Locale } from "@/lib/constants";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { TOUR, type Locale, whatsappUrl } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
 import { ContactForm } from "@/components/ContactForm";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { trackEvent } from "@/tracking/events";
+import { trackEvent, whatsappParams } from "@/tracking/events";
 
 export function ContactSection({
   locale,
@@ -24,16 +24,20 @@ export function ContactSection({
           <p className="mt-4 text-base leading-8 text-fog">{dict.contact.copy}</p>
           <div className="mt-7 grid gap-3 text-fog">
             <a
-              href={`tel:${TOUR.phoneHref}`}
+              href={whatsappUrl(locale, "contact")}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={
+                locale === "es"
+                  ? `Escribir por WhatsApp al ${TOUR.phoneDisplay}`
+                  : `Message on WhatsApp at ${TOUR.phoneDisplay}`
+              }
               onClick={() =>
-                trackEvent("click_call", {
-                  language: locale,
-                  source_section: "contact"
-                })
+                trackEvent("click_whatsapp", whatsappParams(locale, "contact"))
               }
               className="flex items-center gap-3 hover:text-lantern"
             >
-              <Phone aria-hidden="true" size={18} />
+              <MessageCircle aria-hidden="true" size={18} />
               {TOUR.phoneDisplay}
             </a>
             <a

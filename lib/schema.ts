@@ -12,7 +12,6 @@ export function baseBusinessSchema(locale: Locale) {
         name: TOUR.name,
         url: SITE_URL,
         email: TOUR.email,
-        telephone: TOUR.phoneDisplay,
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",

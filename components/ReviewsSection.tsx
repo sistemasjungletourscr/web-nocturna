@@ -27,9 +27,12 @@ function chunkReviews(reviews: TripadvisorReview[], size: number) {
   );
 }
 
-function Stars({ rating }: { rating: number }) {
+function Stars({ rating, locale }: { rating: number; locale: Locale }) {
+  const label =
+    locale === "es" ? `${rating} de 5 estrellas` : `${rating} out of 5 stars`;
+
   return (
-    <div className="flex gap-1 text-lantern" aria-label={`${rating} out of 5`}>
+    <div className="flex gap-1 text-lantern" role="img" aria-label={label}>
       {[0, 1, 2, 3, 4].map((item) => (
         <Star
           key={item}
@@ -172,7 +175,7 @@ export function ReviewsSection({
                       >
                         <div>
                           <div className="flex items-center justify-between gap-4">
-                            <Stars rating={review.rating} />
+                            <Stars rating={review.rating} locale={locale} />
                             <span className="text-xs font-bold uppercase tracking-[0.14em] text-fog">
                               {review.date}
                             </span>
