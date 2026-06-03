@@ -17,7 +17,8 @@ export function Hero({ locale, dict, contentClassName }: HeroProps) {
         src={IMAGES.hero}
         alt="Red-eyed tree frog in Arenal forest at night"
         fill
-        priority
+        preload
+        fetchPriority="high"
         sizes="100vw"
         className="object-cover object-[66%_center]"
       />

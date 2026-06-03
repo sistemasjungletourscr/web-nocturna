@@ -43,11 +43,12 @@ export function Header({ locale, dict, className, page = "home" }: HeaderProps) 
           aria-label="Arenal Forest Night Hike"
         >
           <Image
-            src="/images/arenal-night-hike-header.svg"
+            src="/images/arenal-night-hike-header.png"
             alt="Arenal Forest Night Hike"
             width={1034}
             height={394}
-            priority
+            loading="eager"
+            sizes="(min-width: 1024px) 195px, (min-width: 640px) 175px, 150px"
             className="h-full w-full object-contain object-left"
           />
         </Link>

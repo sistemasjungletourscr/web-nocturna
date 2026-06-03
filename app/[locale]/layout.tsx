@@ -31,11 +31,6 @@ const body = localFont({
       path: "../../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2",
       weight: "700",
       style: "normal"
-    },
-    {
-      path: "../../node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2",
-      weight: "800",
-      style: "normal"
     }
   ],
   variable: "--font-body",
