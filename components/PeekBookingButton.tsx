@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import { TOUR, type Locale } from "@/lib/constants";
+import { peekBookingUrl, type Locale } from "@/lib/constants";
 import { peekBookingParams, trackEvent } from "@/tracking/events";
 
 declare global {
@@ -35,14 +35,13 @@ export function PeekBookingButton({
   useEffect(() => {
     window._peekConfig = { key: PEEK_KEY };
 
-    const stamp = `${new Date().getMonth()}-${new Date().getDate()}`;
     const basePath = "https://js.peek.com";
     const head = document.getElementsByTagName("head")[0];
 
     if (!document.getElementById(PEEK_CSS_ID)) {
       const css = document.createElement("link");
       css.id = PEEK_CSS_ID;
-      css.href = `${basePath}/widget_button.css?ts=${stamp}`;
+      css.href = `${basePath}/widget_button.css`;
       css.rel = "stylesheet";
       css.type = "text/css";
       head.appendChild(css);
@@ -51,7 +50,7 @@ export function PeekBookingButton({
     if (!document.getElementById(PEEK_SCRIPT_ID)) {
       const script = document.createElement("script");
       script.id = PEEK_SCRIPT_ID;
-      script.src = `${basePath}/widget_button.js?ts=${stamp}`;
+      script.src = `${basePath}/widget_button.js`;
       script.async = true;
       head.appendChild(script);
     }
@@ -59,7 +58,7 @@ export function PeekBookingButton({
 
   return (
     <a
-      href={TOUR.peekUrl}
+      href={peekBookingUrl()}
       className={className}
       data-button-text={label}
       onClick={() =>

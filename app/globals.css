@@ -33,6 +33,24 @@ select {
   outline-color: #f5b642;
 }
 
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) *,
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) *::before,
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) *::after {
+  box-sizing: border-box;
+}
+
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) button,
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) input,
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) textarea,
+:where([id*="peek"], [id*="Peek"], [class*="peek"], [class*="Peek"]) select {
+  font-family: inherit;
+}
+
 ::selection {
   background: rgba(245, 182, 66, 0.35);
 }

@@ -92,6 +92,10 @@ export function isLocale(value: string): value is Locale {
   return LOCALES.includes(value as Locale);
 }
 
+export function peekBookingUrl() {
+  return new URL(TOUR.peekUrl).toString();
+}
+
 export function whatsappUrl(locale: Locale, source?: string) {
   const text =
     locale === "es"
