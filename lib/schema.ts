@@ -1,8 +1,10 @@
 import { IMAGES, ROUTES, SITE_URL, TOUR, type Locale } from "@/lib/constants";
 import { getDictionary } from "@/lib/dictionaries";
+import { getReviewAggregate, verifiedTripadvisorReviews } from "@/lib/reviews";
 
 export function baseBusinessSchema(locale: Locale) {
   const dict = getDictionary(locale);
+  const reviewAggregate = getReviewAggregate();
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -32,6 +34,32 @@ export function baseBusinessSchema(locale: Locale) {
           `${SITE_URL}${IMAGES.forest}`
         ],
         description: dict.tour.short,
+        review: verifiedTripadvisorReviews.map((review) => ({
+          "@type": "Review",
+          author: {
+            "@type": "Person",
+            name: review.reviewerName
+          },
+          reviewBody: review.excerpt,
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: review.rating,
+            bestRating: 5,
+            worstRating: 1
+          },
+          url: review.sourceUrl
+        })),
+        ...(reviewAggregate
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: reviewAggregate.ratingValue,
+                reviewCount: reviewAggregate.reviewCount,
+                bestRating: reviewAggregate.bestRating,
+                worstRating: reviewAggregate.worstRating
+              }
+            }
+          : {}),
         brand: {
           "@type": "Brand",
           name: TOUR.name

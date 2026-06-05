@@ -3,23 +3,15 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
-import reviewsData from "@/data/tripadvisor-reviews.json";
 import { TOUR, type Locale } from "@/lib/constants";
 import type { Dictionary } from "@/lib/dictionaries";
+import {
+  verifiedTripadvisorReviews,
+  type TripadvisorReview
+} from "@/lib/reviews";
 import { trackEvent } from "@/tracking/events";
 
-type TripadvisorReview = {
-  id: string;
-  reviewerName: string;
-  rating: number;
-  date: string;
-  excerpt: string;
-  sourceUrl: string;
-};
-
-const verifiedReviews = (reviewsData as TripadvisorReview[])
-  .filter((review) => review.rating >= 4)
-  .slice(0, 10);
+const verifiedReviews = verifiedTripadvisorReviews;
 
 function chunkReviews(reviews: TripadvisorReview[], size: number) {
   return Array.from({ length: Math.ceil(reviews.length / size) }, (_, index) =>
