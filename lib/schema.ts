@@ -1,4 +1,4 @@
-import { ROUTES, SITE_URL, TOUR, type Locale } from "@/lib/constants";
+import { IMAGES, ROUTES, SITE_URL, TOUR, type Locale } from "@/lib/constants";
 import { getDictionary } from "@/lib/dictionaries";
 
 export function baseBusinessSchema(locale: Locale) {
@@ -26,6 +26,11 @@ export function baseBusinessSchema(locale: Locale) {
         "@type": "Product",
         "@id": `${SITE_URL}/#tour`,
         name: TOUR.name,
+        image: [
+          `${SITE_URL}${IMAGES.hero}`,
+          `${SITE_URL}${IMAGES.redEyedPair}`,
+          `${SITE_URL}${IMAGES.forest}`
+        ],
         description: dict.tour.short,
         brand: {
           "@type": "Brand",
