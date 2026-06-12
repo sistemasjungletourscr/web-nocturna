@@ -162,10 +162,35 @@ Files:
 
 - `app/sitemap.ts`
 - `app/robots.ts`
+- `proxy.ts`
 
 The sitemap includes indexable public pages and intentionally excludes thank-you/gracias conversion pages.
 
-The root `/` redirects to `/en` in `proxy.ts`.
+The canonical host is `https://www.arenalnighthike.com`.
+
+Redirect decisions:
+
+- `arenalnighthike.com/*` redirects permanently with `308` to `www.arenalnighthike.com/*`.
+- The root `/` redirects permanently with `308` to `/en`.
+- `/` is intentionally not listed in the sitemap because `/en` is the canonical English homepage.
+
+Robots decisions:
+
+- `robots.txt` intentionally contains only `User-agent`, `Allow`, and `Sitemap`.
+- Do not add the non-standard `Host:` directive back to `robots.txt`; Google ignores it and it can confuse audits.
+- `sitemap.xml` should list only canonical `https://www.arenalnighthike.com/...` URLs.
+
+## Search Console Notes
+
+The Search Console property is a domain property for `arenalnighthike.com`, so it includes `http`, `https`, `www`, and apex variants.
+
+Preferred submitted sitemap:
+
+- `https://www.arenalnighthike.com/sitemap.xml`
+
+If GSC shows old sitemap or robots errors, verify the live URL first because Search Console reports can lag behind deployment. The sitemap may show stale "No se ha podido obtener" or robots warnings even after the live file returns `200` and valid XML.
+
+`Pagina con redireccion` for `/` is expected and intentional because the root URL redirects to `/en`.
 
 ## Verification Checklist
 
