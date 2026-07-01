@@ -212,6 +212,8 @@ export async function POST(request: Request) {
       host: smtpHost,
       port: smtpPort,
       secure: smtpSecure,
+      disableFileAccess: true,
+      disableUrlAccess: true,
       auth: {
         user: smtpUser,
         pass: smtpPass
